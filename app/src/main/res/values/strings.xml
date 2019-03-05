@@ -12,4 +12,15 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="lbl_title">WALMARKET</string>
+    <string name="lbl_login_title">Sign in to Your Account</string>
+    <string name="lbl_email">Email Address</string>
+    <string name="lbl_password">Password</string>
+    <string name="lbl_password_hint">●●●●●●●</string>
+    <string name="lbl_email_hint">your@domain.ca</string>
+    <string name="lblimg">image</string>
+    <string name="lbl_password_forgot">Forgot your password?</string>
+    <string name="lbl_sign_in">Sign In</string>
+    <string name="lbl_account_title">Don\'t have an account?</string>
+    <string name="lbl_create_account">Create Account</string>
 </resources>
