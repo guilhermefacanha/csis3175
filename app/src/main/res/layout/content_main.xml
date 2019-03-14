@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBG"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="@dimen/btn_default_width"
+        android:layout_height="@dimen/btn_default_height"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="452dp"
+        android:background="@drawable/roundbtn"
+        android:text="@string/lbl_continue"
+        android:textColor="@color/colorBtnText" />
+
+    <EditText
+        android:id="@+id/txtFindPostalCode"
+        android:layout_width="@dimen/btn_default_width"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="145dp"
+        android:ems="10"
+        android:hint="@string/lbl_postal_code"
+        android:inputType="textPostalAddress"
+        android:textSize="@dimen/txt_default"
+        tools:ignore="autofill" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="357dp"
+        android:text="@string/lbl_find_store_near"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="135dp"
+        android:layout_height="125dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="223dp"
+        android:contentDescription="@string/lblimg"
+        app:srcCompat="@drawable/ic_home_green" />
+
+</RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBG"
+    tools:context=".RegistrationConfirmActivity">
+
+    <include layout="@layout/topbar" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="129dp"
+        android:text="@string/lbl_account_created"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnRegister2"
+        android:layout_width="@dimen/btn_default_width"
+        android:layout_height="@dimen/btn_default_height"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="533dp"
+        android:background="@drawable/roundbtn"
+        android:onClick="goToLogin"
+        android:text="@string/action_sign_in_short"
+        android:textColor="@color/colorBtnText" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="202dp"
+        android:layout_height="286dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="181dp"
+        android:contentDescription="@string/lblimg"
+        app:srcCompat="@drawable/check" />
+
+
+</RelativeLayout>
