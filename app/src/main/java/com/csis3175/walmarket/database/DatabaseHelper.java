@@ -56,6 +56,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for(String s : strings)
             db.execSQL(s);
 
+        strings = UserDbHelper.insertInitialData();
+        for(String s : strings)
+            db.execSQL(s);
+
         for(ContentValues values : ItemDbHelper.insertInitialData())
             db.insert(ItemDbHelper.TABLE_ITEM,null,values);
 

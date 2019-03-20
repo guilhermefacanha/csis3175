@@ -87,4 +87,19 @@ public class UserDbHelper {
         return user;
     }
 
+    public static String[] insertInitialData() {
+        String insertBase = "INSERT INTO "+TABLE_USER+" ("+
+                TABLE_USER_FNAME+","+TABLE_USER_LNAME+","+TABLE_USER_EMAIL+","+
+                TABLE_USER_ADDRESS+","+TABLE_USER_PASSWORD+","+TABLE_USER_APPLY_FRIEND_DISC+
+                ") VALUES (";
+        String[] inserts = {
+                insertBase + "'Luke', 'Skywalker', 'Luke@StarWars.ca', '100, George Lucas St', '827ccb0eea8a706c4c34a16891f84e7b', null);",
+                insertBase + "'Leia', 'Organa', 'Leia@StarWars.ca', '200, George Lucas St', '827ccb0eea8a706c4c34a16891f84e7b', null);",
+                insertBase + "'Han', 'Solo', 'Han@StarWars.ca', '300, George Lucas St', '827ccb0eea8a706c4c34a16891f84e7b', null);"
+
+        };
+
+        return inserts;
+    }
+
 }
