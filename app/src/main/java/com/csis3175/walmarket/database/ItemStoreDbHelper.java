@@ -6,6 +6,9 @@ import android.database.Cursor;
 
 import com.csis3175.walmarket.entity.ItemStore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemStoreDbHelper {
     public final static String TABLE_ITEM_STORE = "ITEM_STORE";
     public final static String TABLE_ITEM_STORE_ITEM_ID = "ITEM_ID";
@@ -79,6 +82,43 @@ public class ItemStoreDbHelper {
             }
         }
         return itemStore;
+    }
+
+    private static ContentValues getValuesFromItemStore(ItemStore itemStore) {
+        ContentValues values = new ContentValues();
+        values.put(TABLE_ITEM_STORE_ITEM_ID, itemStore.getItemId());
+        values.put(TABLE_ITEM_STORE_STORE_ID, itemStore.getStoreId());
+        values.put(TABLE_ITEM_STORE_PRICE, itemStore.getPrice());
+        values.put(TABLE_ITEM_STORE_DISC_RATE, itemStore.getDiscRate());
+
+        return values;
+    }
+
+    //insert initial data
+    public static List<ContentValues> insertInitialData() {
+        List<ContentValues> inserts = new ArrayList<>();
+
+        Double itemPrice[] = {0.0,5.97,3.00,2.80,1.20,11.00,3.97,2.47,2.97,7.50,3.97,
+                2.66,2.00,1.47,4.47,3.77,3.77,3.18,1.97,1.97,3.26};
+
+        Double price;
+        Double discRate;
+
+        for (int storeId=1; storeId<=5; storeId++)
+            for (int itemId=1; itemId<=20 ; itemId++){
+                price =(int)(((Math.random() * 0.10) + 0.95) * itemPrice[itemId] * 100.0) / 100.0; // -5% to +5% price variation
+
+                discRate = (int)(Math.random() * 2000) / 100.0; // max 20% discount rate
+
+                ItemStore itemStore = new ItemStore();
+                itemStore.setItemId(itemId);
+                itemStore.setStoreId(storeId);
+                itemStore.setPrice(price);
+                itemStore.setDiscRate(discRate);
+                inserts.add(getValuesFromItemStore(itemStore));
+
+            }
+        return inserts;
     }
 
 }

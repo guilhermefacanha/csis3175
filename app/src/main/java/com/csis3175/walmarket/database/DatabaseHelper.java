@@ -59,6 +59,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for(ContentValues values : ItemDbHelper.insertInitialData())
             db.insert(ItemDbHelper.TABLE_ITEM,null,values);
 
+        for(ContentValues values : ItemStoreDbHelper.insertInitialData())
+            db.insert(ItemStoreDbHelper.TABLE_ITEM_STORE,null,values);
+
 
     }
 
