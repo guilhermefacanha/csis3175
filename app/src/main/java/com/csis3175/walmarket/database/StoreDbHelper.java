@@ -20,10 +20,6 @@ public class StoreDbHelper {
         db = new DatabaseHelper(context);
     }
 
-    public StoreDbHelper(DatabaseHelper db) {
-        this.db = db;
-    }
-
     public static String getCreation() {
         return "CREATE TABLE " + TABLE_STORE + "(" +
                 TABLE_STORE_ID + " INTEGER PRIMARY KEY," +
@@ -34,41 +30,27 @@ public class StoreDbHelper {
                 ")";
     }
 
-    public void insertInitialData() {
-        Store store = new Store();
-        store.setName("New West Store");
-        store.setAddress("800 Carnarvon St #220, New Westminster, BC V3M 0C3");
-        store.setLatitude(49.201861);
-        store.setLongitude(-122.913019);
-        addStore(store);
+    public static String[] insertInitialData() {
+        String insertBase = "INSERT INTO "+TABLE_STORE+" ("+TABLE_STORE_NAME+","+TABLE_STORE_ADDRESS+","+TABLE_STORE_LATITUDE+","+TABLE_STORE_LONGITUDE + ") VALUES (";
+        String[] inserts = {
+           insertBase + "'New West Store','800 Carnarvon St #220, New Westminster, BC V3M 0C3',49.201861,-122.913019);",
+           insertBase + "'Surrey Store','10355 King George Blvd, Surrey, BC V3B 6S2',49.192427,-122.845748);",
+           insertBase + "'Collingwood Store','3410 Kingsway, Vancouver, BC V5R 5L4', 49.237770, -123.033112);",
+           insertBase + "'Broadway Store','1780 E Broadway, Vancouver, BC V5N 1W3', 49.267920, -123.066950);",
+           insertBase + "'Burnaby Store','6564 E Hastings St, Burnaby, BC V5B 1S2', 49.286229, -122.968736);"
+        };
 
-        store = new Store();
-        store.setName("Surrey Store");
-        store.setAddress("10355 King George Blvd, Surrey, BC V3B 6S2");
-        store.setLatitude(49.192427);
-        store.setLongitude(-122.845748);
-        addStore(store);
+        return inserts;
+    }
 
-        store = new Store();
-        store.setName("Collingwood Store");
-        store.setAddress("3410 Kingsway, Vancouver, BC V5R 5L4");
-        store.setLatitude(49.237770);
-        store.setLongitude(-123.033112);
-        addStore(store);
+    private static void addStore(Store store, DatabaseHelper dbh) {
+        ContentValues values = new ContentValues();
+        values.put(TABLE_STORE_NAME, store.getName());
+        values.put(TABLE_STORE_LATITUDE, store.getLatitude());
+        values.put(TABLE_STORE_LONGITUDE, store.getLongitude());
+        values.put(TABLE_STORE_ADDRESS, store.getAddress());
 
-        store = new Store();
-        store.setName("Broadway Store");
-        store.setAddress("1780 E Broadway, Vancouver, BC V5N 1W3");
-        store.setLatitude(49.267920);
-        store.setLongitude(-123.066950);
-        addStore(store);
-
-        store = new Store();
-        store.setName("Burnaby Store");
-        store.setAddress("6564 E Hastings St, Burnaby, BC V5B 1S2");
-        store.setLatitude(49.286229);
-        store.setLongitude(-122.968736);
-        addStore(store);
+        dbh.addRecord(TABLE_STORE, values);
     }
 
 

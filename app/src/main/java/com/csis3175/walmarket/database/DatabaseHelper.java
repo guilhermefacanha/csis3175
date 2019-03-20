@@ -6,12 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.csis3175.walmarket.entity.OrderItem;
-
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     final static String DATABASE_NAME = "walmarket.db";
-    final static int DATABASE_VERSION = 5;
+    final static int DATABASE_VERSION = 6;
 
 
     public DatabaseHelper(Context context) {
@@ -50,8 +48,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         //insert data
-        new StoreDbHelper(this).insertInitialData();
-        
+        String[] strings = StoreDbHelper.insertInitialData();
+        for(String s : strings)
+            db.execSQL(s);
+
+        strings = CategoryDbHelper.insertInitialData();
+        for(String s : strings)
+            db.execSQL(s);
+
+        for(ContentValues values : ItemDbHelper.insertInitialData())
+            db.insert(ItemDbHelper.TABLE_ITEM,null,values);
+
+
     }
 
     @Override

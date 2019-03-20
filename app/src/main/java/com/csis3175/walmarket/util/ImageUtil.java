@@ -1,30 +1,33 @@
 package com.csis3175.walmarket.util;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import org.apache.commons.io.IOUtils;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class ImageUtil {
 
     public static byte[] getImage(String imageUrl) {
-        InputStream is = null;
         try {
-            URL url = new URL(imageUrl);
-            is = url.openStream();
-            byte[] imageBytes = IOUtils.toByteArray(is);
-
-            return imageBytes;
-        } catch (IOException e) {
+            OkHttpHandler handler = new OkHttpHandler();
+            byte[] imageArray = handler.execute(imageUrl).get();
+            return imageArray;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                }
-            }
         }
+    }
+
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+        return stream.toByteArray();
     }
 }

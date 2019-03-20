@@ -18,6 +18,10 @@ public class CategoryDbHelper {
         db = new DatabaseHelper(context);
     }
 
+    public CategoryDbHelper(DatabaseHelper dh){
+        this.db = dh;
+    }
+
     public static String getCreation() {
         return "CREATE TABLE " + TABLE_CATEGORY + "(" +
                 TABLE_CATEGORY_ID + " INTEGER PRIMARY KEY," +
@@ -25,15 +29,14 @@ public class CategoryDbHelper {
                 ")";
     }
 
-    public void insertInitialData(){
-        Category c = new Category();
-        c.setDescription("Grocery"); //id 1
-        addCategory(c);
+    public static String[] insertInitialData(){
+        String insertBase = "INSERT INTO "+TABLE_CATEGORY+" ("+TABLE_CATEGORY_DESCRIPTION+ ") VALUES (";
+        String[] inserts = {
+                insertBase + "'Grocery');",
+                insertBase + "'Snacks');"
+        };
 
-        c = new Category();
-        c.setDescription("Snacks"); //id 2
-        addCategory(c);
-
+        return inserts;
     }
 
     public boolean addCategory(Category category){

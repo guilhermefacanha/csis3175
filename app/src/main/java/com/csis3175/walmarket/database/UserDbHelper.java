@@ -9,7 +9,7 @@ import com.csis3175.walmarket.util.Md5Util;
 
 public class UserDbHelper {
 
-    public final static String TABLE_USER = "User";
+    public final static String TABLE_USER = "USER";
     public final static String TABLE_USER_ID = "USER_ID";
     public final static String TABLE_USER_FNAME = "FIRST_NAME";
     public final static String TABLE_USER_LNAME = "LAST_NAME";

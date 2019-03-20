@@ -7,7 +7,7 @@ import android.database.Cursor;
 import com.csis3175.walmarket.entity.Order;
 
 public class OrderDbHelper {
-    public final static String TABLE_ORDER = "ORDER";
+    public final static String TABLE_ORDER = "ORDER_TB";
     public final static String TABLE_ORDER_ID = "ORDER_ID";
     public final static String TABLE_ORDER_USER_ID = "USER_ID";
     public final static String TABLE_ORDER_STORE_ID = "STORE_ID";
