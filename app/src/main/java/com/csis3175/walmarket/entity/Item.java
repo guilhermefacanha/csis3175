@@ -4,6 +4,7 @@ public class Item {
     private Integer itemId;
     private Integer categoryId;
     private String description;
+    private byte[] image;
 
 
     //gets and sets
@@ -31,4 +32,11 @@ public class Item {
         this.description = description;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 }

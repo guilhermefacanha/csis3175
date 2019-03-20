@@ -16,8 +16,12 @@ public class StoreDbHelper {
 
     private DatabaseHelper db;
 
-    public StoreDbHelper(Context context){
+    public StoreDbHelper(Context context) {
         db = new DatabaseHelper(context);
+    }
+
+    public StoreDbHelper(DatabaseHelper db) {
+        this.db = db;
     }
 
     public static String getCreation() {
@@ -30,7 +34,45 @@ public class StoreDbHelper {
                 ")";
     }
 
-    public boolean addStore(Store store){
+    public void insertInitialData() {
+        Store store = new Store();
+        store.setName("New West Store");
+        store.setAddress("800 Carnarvon St #220, New Westminster, BC V3M 0C3");
+        store.setLatitude(49.201861);
+        store.setLongitude(-122.913019);
+        addStore(store);
+
+        store = new Store();
+        store.setName("Surrey Store");
+        store.setAddress("10355 King George Blvd, Surrey, BC V3B 6S2");
+        store.setLatitude(49.192427);
+        store.setLongitude(-122.845748);
+        addStore(store);
+
+        store = new Store();
+        store.setName("Collingwood Store");
+        store.setAddress("3410 Kingsway, Vancouver, BC V5R 5L4");
+        store.setLatitude(49.237770);
+        store.setLongitude(-123.033112);
+        addStore(store);
+
+        store = new Store();
+        store.setName("Broadway Store");
+        store.setAddress("1780 E Broadway, Vancouver, BC V5N 1W3");
+        store.setLatitude(49.267920);
+        store.setLongitude(-123.066950);
+        addStore(store);
+
+        store = new Store();
+        store.setName("Burnaby Store");
+        store.setAddress("6564 E Hastings St, Burnaby, BC V5B 1S2");
+        store.setLatitude(49.286229);
+        store.setLongitude(-122.968736);
+        addStore(store);
+    }
+
+
+    public boolean addStore(Store store) {
         ContentValues values = new ContentValues();
         values.put(TABLE_STORE_NAME, store.getName());
         values.put(TABLE_STORE_LATITUDE, store.getLatitude());
@@ -40,7 +82,7 @@ public class StoreDbHelper {
         return db.addRecord(TABLE_STORE, values);
     }
 
-    public boolean updateStore(Store store){
+    public boolean updateStore(Store store) {
         ContentValues values = new ContentValues();
         values.put(TABLE_STORE_NAME, store.getName());
         values.put(TABLE_STORE_LATITUDE, store.getLatitude());
@@ -49,12 +91,12 @@ public class StoreDbHelper {
 
         String[] params = new String[]{String.valueOf(store.getStoreId())};
 
-        String where =  TABLE_STORE_ID + " = ?";
+        String where = TABLE_STORE_ID + " = ?";
 
-        return db.updateRecord(TABLE_STORE,values,where,params);
+        return db.updateRecord(TABLE_STORE, values, where, params);
     }
 
-    public Store getStoreById(Integer storeId){
+    public Store getStoreById(Integer storeId) {
         Store store = null;
 
         String query = "SELECT " +
@@ -63,7 +105,7 @@ public class StoreDbHelper {
                 TABLE_STORE_LONGITUDE + ", " +
                 TABLE_STORE_ADDRESS +
                 " FROM " + TABLE_STORE +
-                " WHERE "+TABLE_STORE_ID + " = ?";
+                " WHERE " + TABLE_STORE_ID + " = ?";
         String[] params = new String[]{String.valueOf(storeId)};
         Cursor data = db.getData(query, params);
 

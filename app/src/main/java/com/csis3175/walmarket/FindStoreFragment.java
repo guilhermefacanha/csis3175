@@ -78,6 +78,7 @@ public class FindStoreFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frameContent, fragment2);
+                fragmentTransaction.addToBackStack(fragment2.getClass().getSimpleName());
                 fragmentTransaction.commit();
             }
         });

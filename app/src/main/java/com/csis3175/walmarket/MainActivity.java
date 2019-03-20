@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frameContent, fragment);
+            ft.addToBackStack(fragment.getClass().getSimpleName());
             ft.commit();
         }
     }
@@ -75,13 +76,23 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
+        int count  = getSupportFragmentManager().getBackStackEntryCount();
+        if(count == 0){
+            super.onBackPressed();
+        }
+        else{
+            getSupportFragmentManager().popBackStack();
+            fragment = new FindStoreFragment();
+            initializeFragment();
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
-        MessageUtil.addMessage("onBackPressed", this);
     }
 
     @Override

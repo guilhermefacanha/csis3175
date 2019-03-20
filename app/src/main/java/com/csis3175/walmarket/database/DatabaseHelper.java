@@ -6,10 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.csis3175.walmarket.entity.OrderItem;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     final static String DATABASE_NAME = "walmarket.db";
-    final static int DATABASE_VERSION = 4;
+    final static int DATABASE_VERSION = 5;
 
 
     public DatabaseHelper(Context context) {
@@ -18,13 +20,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = UserDbHelper.getCreation();
-        db.execSQL(query);
+        //create tables
+        String userTbCreateQuery = UserDbHelper.getCreation();
+        db.execSQL(userTbCreateQuery);
+
+        String storeTbCreateQuery = StoreDbHelper.getCreation();
+        db.execSQL(storeTbCreateQuery);
+
+        String categoryTbCreateQuery = CategoryDbHelper.getCreation();
+        db.execSQL(categoryTbCreateQuery);
+
+        String orderTbCreateQuery = OrderDbHelper.getCreation();
+        db.execSQL(orderTbCreateQuery);
+
+        String cartTbCreateQuery = CartDbHelper.getCreation();
+        db.execSQL(cartTbCreateQuery);
+
+        String itemTbCreateQuery = ItemDbHelper.getCreation();
+        db.execSQL(itemTbCreateQuery);
+
+        String itemStoreTbCreateQuery = ItemStoreDbHelper.getCreation();
+        db.execSQL(itemStoreTbCreateQuery);
+
+        String cartItemStoreTbCreateQuery = CartItemDbHelper.getCreation();
+        db.execSQL(cartItemStoreTbCreateQuery);
+
+        String orderItemStoreTbCreateQuery = OrderItemDbHelper.getCreation();
+        db.execSQL(orderItemStoreTbCreateQuery);
+
+
+        //insert data
+        new StoreDbHelper(this).insertInitialData();
+        
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + UserDbHelper.TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + StoreDbHelper.TABLE_STORE);
+        db.execSQL("DROP TABLE IF EXISTS " + CategoryDbHelper.TABLE_CATEGORY);
+        db.execSQL("DROP TABLE IF EXISTS " + OrderDbHelper.TABLE_ORDER);
+        db.execSQL("DROP TABLE IF EXISTS " + CartDbHelper.TABLE_CART);
+        db.execSQL("DROP TABLE IF EXISTS " + ItemDbHelper.TABLE_ITEM);
+        db.execSQL("DROP TABLE IF EXISTS " + ItemStoreDbHelper.TABLE_ITEM_STORE);
+        db.execSQL("DROP TABLE IF EXISTS " + CartItemDbHelper.TABLE_CART_ITEM);
+        db.execSQL("DROP TABLE IF EXISTS " + OrderItemDbHelper.TABLE_ORDER_ITEM);
         onCreate(db);
     }
 

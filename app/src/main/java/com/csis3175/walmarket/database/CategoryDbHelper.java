@@ -25,6 +25,17 @@ public class CategoryDbHelper {
                 ")";
     }
 
+    public void insertInitialData(){
+        Category c = new Category();
+        c.setDescription("Grocery"); //id 1
+        addCategory(c);
+
+        c = new Category();
+        c.setDescription("Snacks"); //id 2
+        addCategory(c);
+
+    }
+
     public boolean addCategory(Category category){
         ContentValues values = new ContentValues();
         values.put(TABLE_CATEGORY_DESCRIPTION, category.getDescription());
