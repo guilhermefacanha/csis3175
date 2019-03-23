@@ -65,5 +65,7 @@
     <string name="lbl_5">5.</string>
     <string name="lbl_first_name">First Name</string>
     <string name="lbl_friends_email">Friend\'s Email</string>
+    <string name="ActInfo">Account Information</string>
+    <string name="ApplyChanges">Apply Changes</string>
 
 </resources>

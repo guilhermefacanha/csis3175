@@ -1,13 +1,36 @@
 package com.csis3175.walmarket;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class AccountInformation extends AppCompatActivity {
+import com.csis3175.walmarket.database.UserDbHelper;
+
+
+public class AccountInformation extends Fragment {
+
+    UserDbHelper userDbHelper;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_information);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_account_information, container, false);
+
+
     }
+
+
+
+    public void applychange(View view)
+    {
+
+    }
+
 }
