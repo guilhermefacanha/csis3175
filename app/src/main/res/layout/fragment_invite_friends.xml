@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="50dp"
+    android:background="@color/colorBG"
+    tools:context=".InviteFriendsFragment">
+
+
+    <EditText
+        android:id="@+id/editText19"
+        android:layout_width="105dp"
+        android:layout_height="36dp"
+        android:layout_alignTop="@+id/textView19"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="180dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_first_name"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill"/>
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="25dp"
+        android:layout_height="36dp"
+        android:layout_alignStart="@+id/textView17"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="317dp"
+        android:text="@string/lbl_5"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText20"
+        android:layout_width="226dp"
+        android:layout_height="37dp"
+        android:layout_alignTop="@+id/textView16"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_marginTop="299dp"
+        android:layout_marginEnd="-235dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_friends_email"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill"/>
+
+    <EditText
+        android:id="@+id/editText17"
+        android:layout_width="226dp"
+        android:layout_height="37dp"
+        android:layout_alignTop="@+id/textView16"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_marginTop="256dp"
+        android:layout_marginEnd="-234dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_friends_email"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill"/>
+
+    <EditText
+        android:id="@+id/editText18"
+        android:layout_width="105dp"
+        android:layout_height="36dp"
+        android:layout_alignTop="@+id/textView19"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="137dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_first_name"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill"/>
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="25dp"
+        android:layout_height="36dp"
+        android:layout_alignStart="@+id/textView17"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="274dp"
+        android:text="@string/lbl_4"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText15"
+        android:layout_width="226dp"
+        android:layout_height="37dp"
+        android:layout_alignTop="@+id/textView16"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_marginTop="209dp"
+        android:layout_marginEnd="-232dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_friends_email"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill"/>
+
+    <EditText
+        android:id="@+id/editText16"
+        android:layout_width="105dp"
+        android:layout_height="36dp"
+        android:layout_alignTop="@+id/textView19"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="90dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_first_name"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill"/>
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="25dp"
+        android:layout_height="36dp"
+        android:layout_alignStart="@+id/textView17"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="227dp"
+        android:text="@string/lbl_3"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText13"
+        android:layout_width="226dp"
+        android:layout_height="37dp"
+        android:layout_alignTop="@+id/textView16"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_friends_email"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill" />
+
+    <EditText
+        android:id="@+id/editText14"
+        android:layout_width="105dp"
+        android:layout_height="36dp"
+        android:layout_alignTop="@+id/textView19"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="45dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_first_name"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill"/>
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="25dp"
+        android:layout_height="36dp"
+        android:layout_alignStart="@+id/textView17"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="182dp"
+        android:text="@string/lbl_2"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="25dp"
+        android:layout_height="36dp"
+        android:layout_alignStart="@+id/textView17"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-5dp"
+        android:layout_marginTop="137dp"
+        android:text="@string/lbl_1"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText12"
+        android:layout_width="105dp"
+        android:layout_height="36dp"
+        android:layout_alignTop="@+id/textView19"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_first_name"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill"/>
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="@string/lbl_invite_friends"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="351dp"
+        android:layout_height="39dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="66dp"
+        android:text="@string/lbl_invite_friend_text"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="25dp"
+        android:layout_height="36dp"
+        android:layout_alignStart="@+id/textView17"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-5dp"
+        android:layout_marginTop="137dp"
+        android:text="@string/lbl_1"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="105dp"
+        android:layout_height="36dp"
+        android:layout_alignTop="@+id/textView19"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_first_name"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill"/>
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="226dp"
+        android:layout_height="37dp"
+        android:layout_alignTop="@+id/textView16"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_marginTop="118dp"
+        android:layout_marginEnd="-232dp"
+        android:background="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/lbl_friends_email"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill"/>
+
+
+</RelativeLayout>

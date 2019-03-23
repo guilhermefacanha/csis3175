@@ -56,4 +56,14 @@
     <string name="lbl_near_store">Near Stores</string>
     <string name="nav_header_store">Select a Store...</string>
     <string name="imgAimLocation">Aim Location</string>
+    <string name="lbl_invite_friends">Invite Friends</string>
+    <string name="lbl_invite_friend_text">Invite friends and get 10% off on your next order</string>
+    <string name="lbl_1">1.</string>
+    <string name="lbl_2">2.</string>
+    <string name="lbl_3">3.</string>
+    <string name="lbl_4">4.</string>
+    <string name="lbl_5">5.</string>
+    <string name="lbl_first_name">First Name</string>
+    <string name="lbl_friends_email">Friend\'s Email</string>
+
 </resources>
