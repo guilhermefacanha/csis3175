@@ -126,7 +126,10 @@ public class MainActivity extends AppCompatActivity
             MessageUtil.addMessage("You pushed " + id, this);
 
         } else if (id == R.id.nav_share) {
+            fragment = new InviteFriendsFragment();
+            initializeFragment();
             MessageUtil.addMessage("You pushed " + id, this);
+
 
         } else if (id == R.id.nav_sign_out) {
             MessageUtil.addMessage("You pushed " + id, this);
