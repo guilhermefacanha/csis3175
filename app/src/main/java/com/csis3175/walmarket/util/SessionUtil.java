@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.csis3175.walmarket.entity.Store;
 import com.csis3175.walmarket.entity.User;
 
 public class SessionUtil {
@@ -30,7 +31,24 @@ public class SessionUtil {
         user.setAddress(sp.getString("address",""));
         user.setApplyFriendlyDisc(sp.getInt("apply",0));
         user.setUserId(sp.getInt("id",0));
-
         return user;
+
+    }
+
+    public static void setStore(Store store, Context ctx) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("storeId",store.getStoreId());
+        editor.putString("store",store.getName());
+        editor.commit();
+    }
+
+    public static Store getStore(Context ctx){
+        Store store = new Store();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
+        store.setStoreId(sp.getInt("storeId", 0));
+        store.setName(sp.getString("store",""));
+
+        return store;
     }
 }

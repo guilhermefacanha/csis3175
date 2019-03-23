@@ -55,4 +55,14 @@
         android:contentDescription="@string/lblimg"
         app:srcCompat="@drawable/ic_home_green" />
 
+    <ImageView
+        android:id="@+id/imgFindPc"
+        android:layout_width="30dp"
+        android:layout_height="28dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="279dp"
+        android:layout_marginTop="37dp"
+        android:src="@drawable/ic_gps" />
+
 </RelativeLayout>

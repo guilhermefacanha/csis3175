@@ -1,8 +1,16 @@
 package com.csis3175.walmarket;
 
+import android.Manifest;
 import android.content.Context;
-import android.net.Uri;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,119 +18,140 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.csis3175.walmarket.database.StoreDbHelper;
+import com.csis3175.walmarket.entity.Store;
+import com.csis3175.walmarket.service.AppLocationService;
+import com.csis3175.walmarket.util.AndroidUtil;
+import com.csis3175.walmarket.util.MessageUtil;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FindStoreFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FindStoreFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+
 public class FindStoreFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    MainActivity mainActivity;
     Button btnContinue;
+    EditText txtPostalCode;
+    ImageView imgFindPc;
+    AppLocationService locationService;
+    Geocoder geocoder;
 
-    private OnFragmentInteractionListener mListener;
+    Location location;
+    Address address;
 
-    public FindStoreFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FindStoreFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FindStoreFragment newInstance(String param1, String param2) {
-        FindStoreFragment fragment = new FindStoreFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    StoreDbHelper storeDbHelper;
+    List<Store> stores;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_find_store, container, false);
-
-        btnContinue = view.findViewById(R.id.btnContinue);
-        btnContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SelectStoreFragment fragment2 = new SelectStoreFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frameContent, fragment2);
-                fragmentTransaction.addToBackStack(fragment2.getClass().getSimpleName());
-                fragmentTransaction.commit();
-            }
-        });
-
+        view = inflater.inflate(R.layout.fragment_find_store, container, false);
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mainActivity = (MainActivity) getActivity();
+        locationService = new AppLocationService(mainActivity);
+        geocoder = new Geocoder(mainActivity);
+        storeDbHelper = new StoreDbHelper(mainActivity);
+
+        txtPostalCode = (EditText) mainActivity.findViewById(R.id.txtFindPostalCode);
+        btnContinue = (Button) mainActivity.findViewById(R.id.btnContinue);
+        imgFindPc = (ImageView) mainActivity.findViewById(R.id.imgFindPc);
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getStoresFromPostalCode();
+                if (address != null){
+                    SelectStoreFragment selectStoreFragment = new SelectStoreFragment(stores, txtPostalCode.getText().toString(), address);
+                    //selectStoreFragment.setupParameters(stores, txtPostalCode.getText().toString(), address, getActivity(), view);
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.frameContent, selectStoreFragment);
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    ft.addToBackStack(selectStoreFragment.getClass().getSimpleName());
+                    ft.commit();
+                }
+                    //mainActivity.goToSelectStore(stores, txtPostalCode.getText().toString(), address);
+            }
+        });
+
+        imgFindPc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findPostalCodeOnCurrentLocation();
+            }
+        });
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+    private void findPostalCodeOnCurrentLocation() {
+        location = locationService.getLocation(LocationManager.GPS_PROVIDER);
+        if (location != null) {
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            String locationAddress = "";
+            try {
+                List<Address> fromLocation = geocoder.getFromLocation(latitude, longitude, 10);
+                if (fromLocation != null && fromLocation.size() > 0) {
+                    txtPostalCode.setText(fromLocation.get(0).getPostalCode());
+                    address = fromLocation.get(0);
+                    locationAddress = fromLocation.get(0).getFeatureName() + ", " + fromLocation.get(0).getThoroughfare() + ", " + fromLocation.get(0).getLocality();
+                }
+            } catch (Exception e) {
+                MessageUtil.addMessage("Unable to access current location from device GPS!", mainActivity);
+            }
+
+            MessageUtil.addMessage("Location acquired at: " + locationAddress, mainActivity);
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            MessageUtil.addMessage("Unable to access current location from device GPS!", mainActivity);
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    private void getStoresFromPostalCode() {
+
+        try {
+            if (txtPostalCode.getText().toString().isEmpty())
+                throw new Exception("Please fill out a location to find the nearest store!");
+            stores = storeDbHelper.getAll();
+            if (location == null) {
+                String postalCode = txtPostalCode.getText().toString();
+                List<Address> fromLocationName = geocoder.getFromLocationName(postalCode, 10);
+                if (fromLocationName != null && fromLocationName.size() > 0) {
+                    address = fromLocationName.get(0);
+                    location = new Location("from");
+                    location.setLatitude(address.getLatitude());
+                    location.setLongitude(address.getLongitude());
+                }
+            }
+
+            if (address == null)
+                throw new Exception("Unable to get a valid address from location: " + txtPostalCode.getText().toString());
+
+            calculateDistance();
+
+        } catch (Exception e) {
+            MessageUtil.addMessage(e.getMessage(), mainActivity);
+        }
+
     }
 
+    private void calculateDistance() {
+        for(Store store : stores){
+            Location l = new Location("point B");
+            l.setLatitude(store.getLatitude());
+            l.setLongitude(store.getLongitude());
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+            float distance = l.distanceTo(location);
+            store.setDistance(distance);
+        }
+
+        Collections.sort(stores);
     }
+
 }

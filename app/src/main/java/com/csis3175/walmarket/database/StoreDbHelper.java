@@ -6,6 +6,9 @@ import android.database.Cursor;
 
 import com.csis3175.walmarket.entity.Store;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StoreDbHelper {
     public final static String TABLE_STORE = "STORE";
     public final static String TABLE_STORE_ID = "STORE_ID";
@@ -95,7 +98,8 @@ public class StoreDbHelper {
             while (data.moveToNext()) {
                 store = new Store();
                 int i = 0;
-                store.setStoreId(storeId);
+                store.setStoreId(data.getInt(i++));
+                store.setName(data.getString(i++));
                 store.setLatitude(data.getDouble(i++));
                 store.setLongitude(data.getDouble(i++));
                 store.setAddress(data.getString(i++));
@@ -104,4 +108,25 @@ public class StoreDbHelper {
         return store;
     }
 
+    public List<Store> getAll() {
+        List<Store> stores = new ArrayList<>();
+        Store store = null;
+        Cursor data = db.getAll(TABLE_STORE);
+
+        if (data != null && data.getCount() > 0) {
+            while (data.moveToNext()) {
+                store = new Store();
+
+                int i = 0;
+                store.setStoreId(data.getInt(i++));
+                store.setName(data.getString(i++));
+                store.setLatitude(data.getDouble(i++));
+                store.setLongitude(data.getDouble(i++));
+                store.setAddress(data.getString(i++));
+
+                stores.add(store);
+            }
+        }
+        return stores;
+    }
 }

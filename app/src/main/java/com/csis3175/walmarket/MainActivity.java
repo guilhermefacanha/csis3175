@@ -1,14 +1,11 @@
 package com.csis3175.walmarket;
 
-import android.net.Uri;
+import android.location.Address;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,16 +13,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.csis3175.walmarket.entity.Store;
 import com.csis3175.walmarket.entity.User;
 import com.csis3175.walmarket.util.MessageUtil;
 import com.csis3175.walmarket.util.SessionUtil;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SelectStoreFragment.OnFragmentInteractionListener, FindStoreFragment.OnFragmentInteractionListener {
+import java.util.List;
 
-    TextView lblUserName, lblUserEmail;
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+
+    TextView lblUserName, lblUserEmail, lblUserStore;
     User userLogged;
     Fragment fragment = null;
 
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView headView = findViewById(R.id.nav_view);
         lblUserName = headView.getHeaderView(0).findViewById(R.id.lblUserName);
         lblUserEmail = headView.getHeaderView(0).findViewById(R.id.lblUserEmail);
+        lblUserStore = headView.getHeaderView(0).findViewById(R.id.lblUserStore);
 
         userLogged = SessionUtil.getUser(this);
         if (userLogged != null && userLogged.getUserId() > 0) {
@@ -77,11 +80,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
 
-        int count  = getSupportFragmentManager().getBackStackEntryCount();
-        if(count == 0){
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
             super.onBackPressed();
-        }
-        else{
+        } else {
             getSupportFragmentManager().popBackStack();
             fragment = new FindStoreFragment();
             initializeFragment();
@@ -144,8 +146,13 @@ public class MainActivity extends AppCompatActivity
         MessageUtil.addMessage("Continue Find Store no implemented!", this);
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void goToSelectStore(List<Store> stores, String postalCode, Address address) {
+        Toast.makeText(this, "Thats it: " + postalCode, Toast.LENGTH_SHORT).show();
+    }
 
+    public void updateStoreInfo() {
+        Store store = SessionUtil.getStore(this);
+        if (store.getStoreId() > 0)
+            lblUserStore.setText(store.getName());
     }
 }

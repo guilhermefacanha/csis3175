@@ -1,108 +1,99 @@
 package com.csis3175.walmarket;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
+import android.location.Address;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+import com.csis3175.walmarket.entity.Store;
+import com.csis3175.walmarket.util.MessageUtil;
+import com.csis3175.walmarket.util.SessionUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SelectStoreFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SelectStoreFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SelectStoreFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    MainActivity mainActivity;
+    private Address address;
+    private String postalCode;
+    private List<Store> stores;
 
-    private OnFragmentInteractionListener mListener;
+    private List<HashMap<String, String>> listMap = new ArrayList<>();
+
+    private ListView list;
+    private Context context;
+    private View view;
 
     public SelectStoreFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SelectStoreFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SelectStoreFragment newInstance(String param1, String param2) {
-        SelectStoreFragment fragment = new SelectStoreFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    @SuppressLint("ValidFragment")
+    public SelectStoreFragment(List<Store> stores, String postalCode, Address address) {
+        this.stores = stores;
+        this.postalCode = postalCode;
+        this.address = address;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select_store, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        view = inflater.inflate(R.layout.fragment_select_store, container, false);
+        return view;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mainActivity = (MainActivity) getActivity();
+        initalizeList();
+    }
+
+    private void initalizeList() {
+        try {
+            for (Store store : stores) {
+                HashMap<String, String> map = new HashMap<>();
+                //map.put("img", Integer.toString(R.drawable.ic_map));
+                map.put("name", store.getName());
+                map.put("dist", store.getFormatedDistance());
+
+                listMap.add(map);
+            }
+
+            String[] from = {"name", "dist"};
+            int[] to = {R.id.store_name, R.id.store_distance};
+            SimpleAdapter adapter = new SimpleAdapter(mainActivity, listMap, R.layout.lst_near_store, from, to);
+            list = mainActivity.findViewById(R.id.lstNearStores);
+            list.setAdapter(adapter);
+            list.setOnItemClickListener(listClickListener());
+        } catch (Exception e) {
+            MessageUtil.addMessage(e.getMessage(), mainActivity);
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    private AdapterView.OnItemClickListener listClickListener() {
+        return new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MessageUtil.addMessage("Selected store :" + position, mainActivity);
+                SessionUtil.setStore(stores.get(position), mainActivity);
+                mainActivity.updateStoreInfo();
+            }
+        };
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+
 }
