@@ -24,8 +24,9 @@ public class InviteFriendsFragment extends Fragment {
     UserDbHelper userDbHelper;
     MainActivity mainActivity;
     Button btnInviteFriends;
-    EditText  txtFirstFriend1,txtFirstFriend2,txtFirstFriend3,txtFirstFriend4,txtFirstFriend5;
+    EditText  txtFirstName1,txtFirstName2,txtFirstName3,txtFirstName4,txtFirstName5;
     EditText txtFriendEmail1,txtFriendEmail2,txtFriendEmail3,txtFriendEmail4,txtFriendEmail5;
+    String emailPattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 
     @Override
@@ -43,11 +44,11 @@ public class InviteFriendsFragment extends Fragment {
         mainActivity = (MainActivity) getActivity();
         userDbHelper = new UserDbHelper(mainActivity);
 
-        txtFirstFriend1 = mainActivity.findViewById(R.id.txtFirstName_1);
-        txtFirstFriend2 = mainActivity.findViewById(R.id.txtFirstName_2);
-        txtFirstFriend3 = mainActivity.findViewById(R.id.txtFirstName_3);
-        txtFirstFriend4 = mainActivity.findViewById(R.id.txtFirstName_4);
-        txtFirstFriend5 = mainActivity.findViewById(R.id.txtFirstName_5);
+        txtFirstName1 = mainActivity.findViewById(R.id.txtFirstName_1);
+        txtFirstName2 = mainActivity.findViewById(R.id.txtFirstName_2);
+        txtFirstName3 = mainActivity.findViewById(R.id.txtFirstName_3);
+        txtFirstName4 = mainActivity.findViewById(R.id.txtFirstName_4);
+        txtFirstName5 = mainActivity.findViewById(R.id.txtFirstName_5);
 
         txtFriendEmail1 = mainActivity.findViewById(R.id.txtFriendEmail_1);
         txtFriendEmail2 = mainActivity.findViewById(R.id.txtFriendEmail_2);
@@ -60,20 +61,41 @@ public class InviteFriendsFragment extends Fragment {
         btnInviteFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                     if (txtFirstName1.getText().toString().isEmpty() || txtFriendEmail1.getText().toString().isEmpty()) {
+                      //MessageUtil.addMessage("Invite at least 1 friend to get 10% OFF", mainActivity);
+                         throw new Exception("Invite at least 1 friend to get 10% OFF");
+                     }
 
-                if(txtFirstFriend1 != null && txtFriendEmail1 !=null){
-                    confirm(v);
-                    MessageUtil.addMessage("You Got 10% OFF in your next purchase", mainActivity);
+                     if (!txtFriendEmail1.getText().toString().matches(emailPattern))
+                        throw new Exception("Enter a valid Email address");
+
+                     if (!txtFriendEmail2.getText().toString().matches(emailPattern) && !txtFriendEmail2.getText().toString().isEmpty())
+                        throw new Exception("Enter a valid Email address");
+                     if (!txtFriendEmail3.getText().toString().matches(emailPattern)&& !txtFriendEmail3.getText().toString().isEmpty())
+                        throw new Exception("Enter a valid Email address");
+                     if (!txtFriendEmail4.getText().toString().matches(emailPattern)&& !txtFriendEmail4.getText().toString().isEmpty())
+                        throw new Exception("Enter a valid Email address");
+                     if (!txtFriendEmail5.getText().toString().matches(emailPattern)&& !txtFriendEmail5.getText().toString().isEmpty())
+                        throw new Exception("Enter a valid Email address");
+
+                     else {
+                        confirmFriendInvitation(v);
+                        MessageUtil.addMessage("You Got 10% OFF in your next purchase", mainActivity);
+                    }
                 }
-
+                catch (Exception e) {
+                            MessageUtil.addMessage(e.getMessage(), mainActivity);
+                }
             }
         });
 
 
     }
 
-    public void confirm(View view){
+    public void confirmFriendInvitation(View view){
         User user = SessionUtil.getUser(getActivity());
+        user = userDbHelper.getUserByEmail(user.getEmail());
         user.setApplyFriendlyDisc(10);
         userDbHelper.updateRecord(user);
 

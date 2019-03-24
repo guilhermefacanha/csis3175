@@ -10,12 +10,15 @@ import com.csis3175.walmarket.database.UserDbHelper;
 import com.csis3175.walmarket.entity.User;
 import com.csis3175.walmarket.util.MessageUtil;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     UserDbHelper userDbHelper;
 
     EditText txtFName, txtLName, txtEmail, txtAddress, txtPass, txtConfPass;
-
+    String emailPattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +74,18 @@ public class RegistrationActivity extends AppCompatActivity {
             throw new Exception("Required field Last Name");
         if (txtEmail.getText().toString().isEmpty())
             throw new Exception("Required field Email");
+        if (!(txtEmail.getText().toString()).matches(emailPattern))
+            throw new Exception("Enter a valid Email address");
         if (txtAddress.getText().toString().isEmpty())
             throw new Exception("Required field Address");
         if (txtPass.getText().toString().isEmpty())
             throw new Exception("Required field Password");
         if (txtConfPass.getText().toString().isEmpty())
             throw new Exception("Required field Confirm Password");
-
         if (!txtPass.getText().toString().equals(txtConfPass.getText().toString()))
             throw new Exception("Passwords are not the same!");
     }
+
+
+
 }
