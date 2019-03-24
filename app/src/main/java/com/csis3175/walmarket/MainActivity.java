@@ -126,7 +126,8 @@ public class MainActivity extends AppCompatActivity
             } else
                 MessageUtil.addMessage("You must select a store to visit the items!", this);
         } else if (id == R.id.nav_acct_info) {
-            MessageUtil.addMessage("You pushed " + id, this);
+            fragment = new AccountInformationFragment();
+            initializeFragment();
 
         } else if (id == R.id.nav_view_orders) {
             MessageUtil.addMessage("You pushed " + id, this);
