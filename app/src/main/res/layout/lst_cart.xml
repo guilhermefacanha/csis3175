@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/lst_height">
+
+    <ImageView
+        android:id="@+id/cart_item_img"
+        android:layout_width="40dp"
+        android:layout_height="@dimen/lst_height"
+        android:layout_weight="1"
+        android:contentDescription="@string/lblimg"
+        android:gravity="center"
+        app:srcCompat="@drawable/ic_cart" />
+
+    <TextView
+        android:id="@+id/cart_item_desc"
+        android:layout_width="90dp"
+        android:layout_height="@dimen/lst_height"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/cart_item_qty"
+        android:layout_width="10dp"
+        android:layout_height="@dimen/lst_height"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="5dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btnAddItemCart"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/lblimg"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_arrow_up" />
+
+        <ImageButton
+            android:id="@+id/btnRemoveItemCart"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:contentDescription="@string/lblimg"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_arrow_down" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cart_item_total"
+        android:layout_width="40dp"
+        android:layout_height="@dimen/lst_height"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/btnDeleteItemCart"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_remove" />
+
+
+</LinearLayout>

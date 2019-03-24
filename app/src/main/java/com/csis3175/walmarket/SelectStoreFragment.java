@@ -6,6 +6,7 @@ import android.location.Address;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,9 +89,15 @@ public class SelectStoreFragment extends Fragment {
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MessageUtil.addMessage("Selected store :" + position, mainActivity);
                 SessionUtil.setStore(stores.get(position), mainActivity);
                 mainActivity.updateStoreInfo();
+
+                ItemStoreFragment itemStoreFragment = new ItemStoreFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.frameContent, itemStoreFragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(itemStoreFragment.getClass().getSimpleName());
+                ft.commit();
             }
         };
     }

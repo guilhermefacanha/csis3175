@@ -15,7 +15,7 @@ public class CartDbHelper {
 
     private DatabaseHelper db;
 
-    public CartDbHelper(Context context){
+    public CartDbHelper(Context context) {
         db = new DatabaseHelper(context);
     }
 
@@ -28,7 +28,7 @@ public class CartDbHelper {
                 ")";
     }
 
-    public boolean addCart(Cart cart){
+    public boolean addCart(Cart cart) {
         ContentValues values = new ContentValues();
         values.put(TABLE_CART_USER_ID, cart.getUserId());
         values.put(TABLE_CART_STORE_ID, cart.getStoreId());
@@ -37,7 +37,7 @@ public class CartDbHelper {
         return db.addRecord(TABLE_CART, values);
     }
 
-    public boolean updateCart(Cart cart){
+    public boolean updateCart(Cart cart) {
         ContentValues values = new ContentValues();
         values.put(TABLE_CART_USER_ID, cart.getUserId());
         values.put(TABLE_CART_STORE_ID, cart.getStoreId());
@@ -45,12 +45,12 @@ public class CartDbHelper {
 
         String[] params = new String[]{String.valueOf(cart.getCartId())};
 
-        String where =  TABLE_CART_ID + " = ?";
+        String where = TABLE_CART_ID + " = ?";
 
-        return db.updateRecord(TABLE_CART,values,where,params);
+        return db.updateRecord(TABLE_CART, values, where, params);
     }
 
-    public Cart getCartById(Integer cartId){
+    public Cart getCartById(Integer cartId) {
         Cart cart = null;
 
         String query = "SELECT " +
@@ -73,5 +73,30 @@ public class CartDbHelper {
             }
         }
         return cart;
+    }
+
+    public Cart getLastCartByUserStore(Integer userId, Integer storeId) {
+        Cart cart = null;
+
+        String query = "SELECT * FROM " + TABLE_CART +
+                " WHERE " + TABLE_CART_STORE_ID + " = ? " +
+                " AND " + TABLE_CART_USER_ID + " = ? ORDER BY "+TABLE_CART_ID;
+        String[] params = new String[]{String.valueOf(storeId),String.valueOf(userId)};
+        Cursor data = db.getData(query, params);
+
+        if (data != null && data.getCount() > 0) {
+            while (data.moveToNext()) {
+                cart = new Cart();
+                int i = 0;
+                cart.setCartId(data.getInt(i++));
+                cart.setUserId(data.getInt(i++));
+                cart.setStoreId(data.getInt(i++));
+                cart.setTotal(data.getDouble(i++));
+
+                return cart;
+            }
+        }
+        return cart;
+
     }
 }

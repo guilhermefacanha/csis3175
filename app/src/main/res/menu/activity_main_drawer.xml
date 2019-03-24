@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_map"
             android:title="@string/lbl_find_store" />
         <item
+            android:id="@+id/nav_select_item"
+            android:icon="@drawable/ic_sel_items"
+            android:title="@string/lbl_select_items" />
+        <item
             android:id="@+id/nav_acct_info"
             android:icon="@drawable/ic_info"
             android:title="@string/lbl_account_info" />

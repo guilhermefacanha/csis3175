@@ -1,5 +1,6 @@
 package com.csis3175.walmarket;
 
+import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity
             lblUserName.setText(userLogged.getfName() + userLogged.getlName());
             lblUserEmail.setText(userLogged.getEmail());
         }
+
+        updateStoreInfo();
     }
 
     @Override
@@ -114,13 +117,16 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_find_store) {
-            MessageUtil.addMessage("You pushed " + id, this);
             fragment = new FindStoreFragment();
             initializeFragment();
+        } else if (id == R.id.nav_select_item) {
+            if (SessionUtil.isStoreSelected(this)) {
+                fragment = new ItemStoreFragment();
+                initializeFragment();
+            } else
+                MessageUtil.addMessage("You must select a store to visit the items!", this);
         } else if (id == R.id.nav_acct_info) {
             MessageUtil.addMessage("You pushed " + id, this);
-            fragment = new SelectStoreFragment();
-            initializeFragment();
 
         } else if (id == R.id.nav_view_orders) {
             MessageUtil.addMessage("You pushed " + id, this);
@@ -129,11 +135,9 @@ public class MainActivity extends AppCompatActivity
             fragment = new InviteFriendsFragment();
             initializeFragment();
             MessageUtil.addMessage("You pushed " + id, this);
-
-
         } else if (id == R.id.nav_sign_out) {
-            MessageUtil.addMessage("You pushed " + id, this);
-
+            SessionUtil.destroy(this);
+            startActivity(new Intent(this, LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -142,7 +146,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void goCart(View view) {
-        MessageUtil.addMessage("Go to Cart Screen no implemented!", this);
+        if (SessionUtil.isStoreSelected(this)) {
+            fragment = new CartFragment();
+            initializeFragment();
+        } else
+            MessageUtil.addMessage("You must select a store to visit the cart!", this);
     }
 
     public void continueFindStore(View view) {

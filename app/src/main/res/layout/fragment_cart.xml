@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/frame_top_margin"
+    android:background="@color/colorBG"
+    tools:context=".CartFragment" >
+
+    <Button
+        android:id="@+id/btnCheckout"
+        android:layout_width="@dimen/btn_default_width"
+        android:layout_height="@dimen/btn_default_height"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="439dp"
+        android:background="@drawable/roundbtn"
+        android:text="@string/lbl_checkout"
+        android:textColor="@color/colorBtnText" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:text="@string/lbl_my_cart"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/lstCartItem"
+        android:layout_width="389dp"
+        android:layout_height="382dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="45dp" />
+</RelativeLayout>
