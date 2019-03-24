@@ -112,6 +112,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean deleteRecord(String query, Object[] params) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL(query, params);
+
+        return true;
+    }
+
     public Cursor getData(String query, String[] params) {
         SQLiteDatabase database = this.getReadableDatabase();
         return database.rawQuery(query, params);

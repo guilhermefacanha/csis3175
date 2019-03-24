@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.csis3175.walmarket.CartFragment;
 import com.csis3175.walmarket.R;
+import com.csis3175.walmarket.database.CartItemDbHelper;
 import com.csis3175.walmarket.entity.CartItem;
 import com.csis3175.walmarket.util.ImageUtil;
 import com.csis3175.walmarket.util.MessageUtil;
@@ -24,11 +25,13 @@ public class CartItemListAdapter extends BaseAdapter {
     private final Context context;
     private final List<CartItem> items;
     private final CartFragment parent;
+    private CartItemDbHelper cartItemDbHelper;
 
     public CartItemListAdapter(List<CartItem> items, Context context, CartFragment cartFragment) {
         this.context = context;
         this.items = items;
         this.parent = cartFragment;
+        this.cartItemDbHelper = new CartItemDbHelper(context);
     }
 
     @Override
@@ -68,7 +71,12 @@ public class CartItemListAdapter extends BaseAdapter {
         txtTotal.setText("Subtotal\n" + item.getTotalStr());
         image.setImageBitmap(ImageUtil.byteToBitmap(item.getItemImage()));
 
-        btnRemove.setOnClickListener(removeItemCart(item));
+        if (item.getQuantity() > 1) {
+            btnRemove.setVisibility(View.VISIBLE);
+            btnRemove.setOnClickListener(removeItemCart(item));
+        } else {
+            btnRemove.setVisibility(View.INVISIBLE);
+        }
         btnAdd.setOnClickListener(addItemCart(item));
         btnDel.setOnClickListener(deleteItemCart(item));
         return view;
@@ -78,7 +86,9 @@ public class CartItemListAdapter extends BaseAdapter {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MessageUtil.addMessage("Add one unit of item " + item.getItemDescription(), context);
+                item.setQuantity(item.getQuantity() + 1);
+                cartItemDbHelper.updateCart(item);
+                parent.updateCart("Item " + item.getItemDescription() + " unit added to your cart");
             }
         };
     }
@@ -87,7 +97,10 @@ public class CartItemListAdapter extends BaseAdapter {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MessageUtil.addMessage("Remove one unit of item " + item.getItemDescription(), context);
+                item.setQuantity(item.getQuantity() - 1);
+                cartItemDbHelper.updateCart(item);
+                parent.updateCart("Item " + item.getItemDescription() + " unit removed from your cart");
+
             }
         };
     }
@@ -96,8 +109,8 @@ public class CartItemListAdapter extends BaseAdapter {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MessageUtil.addMessage("Delete the item " + item.getItemDescription(), context);
-                parent.updateCart();
+                cartItemDbHelper.deleteCartItem(item);
+                parent.updateCart("Item " + item.getItemDescription() + " removed from your cart");
             }
         };
     }

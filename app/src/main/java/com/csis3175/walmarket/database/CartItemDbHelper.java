@@ -111,4 +111,13 @@ public class CartItemDbHelper {
 
         return list;
     }
+
+    public boolean deleteCartItem(CartItem item) {
+
+        String query = "DELETE FROM " + TABLE_CART_ITEM +
+                        " WHERE " + TABLE_CART_ITEM_CART_ID + " = ? " +
+                        " AND " + TABLE_CART_ITEM_ITEM_ID + " = ?";
+        Object[] params = {item.getCartId(),item.getItemId()};
+        return db.deleteRecord(query, params);
+    }
 }

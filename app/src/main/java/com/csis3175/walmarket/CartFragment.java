@@ -63,11 +63,11 @@ public class CartFragment extends Fragment {
         user = SessionUtil.getUser(mainActivity);
 
         cart = cartDbHelper.getLastCartByUserStore(user.getUserId(), store.getStoreId());
-        items = cartItemDbHelper.getCartItemsByCartId(cart.getCartId());
     }
 
     private void initializeList() {
         try {
+            items = cartItemDbHelper.getCartItemsByCartId(cart.getCartId());
             CartItemListAdapter adapter = new CartItemListAdapter(items, mainActivity, this);
             list = mainActivity.findViewById(R.id.lstCartItem);
             list.setAdapter(adapter);
@@ -76,7 +76,8 @@ public class CartFragment extends Fragment {
         }
     }
 
-    public void updateCart() {
-        MessageUtil.addMessage("Update Cart by adapater", mainActivity);
+    public void updateCart(String msg) {
+        initializeList();
+        MessageUtil.addMessage(msg,mainActivity);
     }
 }
