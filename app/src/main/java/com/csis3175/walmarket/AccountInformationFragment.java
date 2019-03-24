@@ -24,7 +24,7 @@ public class AccountInformationFragment extends Fragment {
     User user;
     MainActivity mainActivity;
 
-  EditText txtlName,txtfName,txtAdrress,txtPass,txtEmail;
+  EditText txtlName,txtfName,txtAdrress,txtNewPass,txtEmail,txtConfirmPass;
   Button btn;
 
     @Override
@@ -45,7 +45,8 @@ public class AccountInformationFragment extends Fragment {
         txtlName = mainActivity.findViewById(R.id.etlName);
         txtEmail = mainActivity.findViewById(R.id.etEmail);
         txtAdrress = mainActivity.findViewById(R.id.etAddress);
-        txtPass = mainActivity.findViewById(R.id.etPassword);
+        txtNewPass = mainActivity.findViewById(R.id.etNewPassword);
+        txtConfirmPass = mainActivity.findViewById(R.id.etConfirmPassword);
         btn = mainActivity.findViewById(R.id.btnApplyChanges);
 
         User user = userDbHelper.getUserByEmail(SessionUtil.getUser(mainActivity).getEmail());
@@ -53,7 +54,7 @@ public class AccountInformationFragment extends Fragment {
         txtlName.setText(user.getlName());
         txtEmail.setText(user.getEmail());
         txtAdrress.setText(user.getAddress());
-        txtPass.setText(user.getPassword());
+
 
 
 
@@ -64,12 +65,45 @@ public class AccountInformationFragment extends Fragment {
             public void onClick(View v) {
 
 
-                if(!txtfName.equals(user.getfName())){
+                if(!txtfName.getText().toString().equals(user.getfName())){
                     user.setfName(txtfName.getText().toString());
                     userDbHelper.updateRecord(user);
-                    MessageUtil.addMessage("Record Updated", mainActivity);
+                    MessageUtil.addMessage("First Name Updated", mainActivity);
                 }
 
+                if(!txtlName.getText().toString().equals(user.getlName())){
+                    user.setlName(txtlName.getText().toString());
+                    userDbHelper.updateRecord(user);
+                    MessageUtil.addMessage("Last Name Updated", mainActivity);
+                }
+
+                if(!txtEmail.getText().toString().equals(user.getEmail())){
+                    user.setEmail(txtEmail.getText().toString());
+                    userDbHelper.updateRecord(user);
+                    MessageUtil.addMessage("Email Updated", mainActivity);
+                }
+
+                if(!txtAdrress.getText().toString().equals(user.getAddress())){
+                    user.setAddress(txtAdrress.getText().toString());
+                    userDbHelper.updateRecord(user);
+                    MessageUtil.addMessage("Address Updated", mainActivity);
+                }
+
+                if(!txtNewPass.getText().toString().isEmpty()){
+
+                    if(txtNewPass.getText().toString().equals(txtConfirmPass.getText().toString())){
+                        user.setPassword(txtNewPass.getText().toString());
+                        userDbHelper.updateRecord(user);
+                        MessageUtil.addMessage("Password Updated", mainActivity);
+                    }
+
+                    else{
+                        MessageUtil.addMessage("Passwords does not match", mainActivity);
+                    }
+
+
+
+                }
 
 
             }

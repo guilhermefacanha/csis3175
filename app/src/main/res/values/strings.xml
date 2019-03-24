@@ -72,5 +72,6 @@
     <string name="lbl_description">Description</string>
     <string name="lbl_search_item">type at least 3 letters to search an item...</string>
     <string name="lbl_checkout">Checkout</string>
+    <string name="lbl_new_password">New Password</string>
 
 </resources>

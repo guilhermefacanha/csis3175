@@ -54,7 +54,7 @@ public class UserDbHelper {
         values.put(TABLE_USER_LNAME, user.getlName());
         values.put(TABLE_USER_EMAIL, user.getEmail());
         values.put(TABLE_USER_ADDRESS, user.getAddress());
-        values.put(TABLE_USER_PASSWORD, user.getPassword());
+        values.put(TABLE_USER_PASSWORD, Md5Util.getMd5(user.getPassword()));
         values.put(TABLE_USER_APPLY_FRIEND_DISC, user.getApplyFriendlyDisc());
 
         String[] params = new String[]{String.valueOf(user.getUserId())};
