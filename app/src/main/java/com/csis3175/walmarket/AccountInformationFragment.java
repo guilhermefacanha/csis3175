@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.csis3175.walmarket.database.UserDbHelper;
 import com.csis3175.walmarket.entity.User;
+import com.csis3175.walmarket.util.MessageUtil;
 import com.csis3175.walmarket.util.SessionUtil;
 
 
@@ -23,7 +24,7 @@ public class AccountInformationFragment extends Fragment {
     User user;
     MainActivity mainActivity;
 
-  EditText txtlName, txtfName,txtAdrress,txtPass,txtEmail;
+  EditText txtlName,txtfName,txtAdrress,txtPass,txtEmail;
   Button btn;
 
     @Override
@@ -31,9 +32,7 @@ public class AccountInformationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_account_information, container, false);
-
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -42,15 +41,40 @@ public class AccountInformationFragment extends Fragment {
 
         userDbHelper = new UserDbHelper(mainActivity);
 
-        txtlName = mainActivity.findViewById(R.id.etlName);
         txtfName = mainActivity.findViewById(R.id.etfName);
+        txtlName = mainActivity.findViewById(R.id.etlName);
+        txtEmail = mainActivity.findViewById(R.id.etEmail);
         txtAdrress = mainActivity.findViewById(R.id.etAddress);
         txtPass = mainActivity.findViewById(R.id.etPassword);
-        txtEmail = mainActivity.findViewById(R.id.etEmail);
+        btn = mainActivity.findViewById(R.id.btnApplyChanges);
 
         User user = userDbHelper.getUserByEmail(SessionUtil.getUser(mainActivity).getEmail());
-        txtlName.setText(user.getlName());
         txtfName.setText(user.getfName());
+        txtlName.setText(user.getlName());
+        txtEmail.setText(user.getEmail());
+        txtAdrress.setText(user.getAddress());
+        txtPass.setText(user.getPassword());
+
+
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            MainActivity mainActivity = (MainActivity) getActivity();
+            User user = userDbHelper.getUserByEmail(SessionUtil.getUser(mainActivity).getEmail());
+            @Override
+            public void onClick(View v) {
+
+
+                if(!txtfName.equals(user.getfName())){
+                    user.setfName(txtfName.getText().toString());
+                    userDbHelper.updateRecord(user);
+                    MessageUtil.addMessage("Record Updated", mainActivity);
+                }
+
+
+
+            }
+        });
+
 
 
     }

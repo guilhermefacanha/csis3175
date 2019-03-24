@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
 
         userLogged = SessionUtil.getUser(this);
         if (userLogged != null && userLogged.getUserId() > 0) {
-            lblUserName.setText(userLogged.getfName() + userLogged.getlName());
+            lblUserName.setText(userLogged.getfName() +" "+  userLogged.getlName());
             lblUserEmail.setText(userLogged.getEmail());
         }
 
