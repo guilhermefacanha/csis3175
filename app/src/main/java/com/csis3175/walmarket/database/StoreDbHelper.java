@@ -57,7 +57,7 @@ public class StoreDbHelper {
     }
 
 
-    public boolean addStore(Store store) {
+    public long addStore(Store store) {
         ContentValues values = new ContentValues();
         values.put(TABLE_STORE_NAME, store.getName());
         values.put(TABLE_STORE_LATITUDE, store.getLatitude());

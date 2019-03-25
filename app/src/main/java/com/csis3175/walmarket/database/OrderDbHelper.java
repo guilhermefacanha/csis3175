@@ -4,7 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import com.csis3175.walmarket.entity.CartItem;
 import com.csis3175.walmarket.entity.Order;
+import com.csis3175.walmarket.entity.OrderItem;
+
+import java.util.List;
 
 public class OrderDbHelper {
     public final static String TABLE_ORDER = "ORDER_TB";
@@ -20,7 +24,7 @@ public class OrderDbHelper {
 
     private DatabaseHelper db;
 
-    public OrderDbHelper(Context context){
+    public OrderDbHelper(Context context) {
         db = new DatabaseHelper(context);
     }
 
@@ -38,7 +42,7 @@ public class OrderDbHelper {
                 ")";
     }
 
-    public boolean addOrder(Order order){
+    public long addOrder(Order order) {
         ContentValues values = new ContentValues();
         values.put(TABLE_ORDER_USER_ID, order.getUserId());
         values.put(TABLE_ORDER_STORE_ID, order.getStoreId());
@@ -52,7 +56,7 @@ public class OrderDbHelper {
         return db.addRecord(TABLE_ORDER, values);
     }
 
-    public boolean updateOrder(Order order){
+    public boolean updateOrder(Order order) {
         ContentValues values = new ContentValues();
         values.put(TABLE_ORDER_USER_ID, order.getUserId());
         values.put(TABLE_ORDER_STORE_ID, order.getStoreId());
@@ -65,12 +69,12 @@ public class OrderDbHelper {
 
         String[] params = new String[]{String.valueOf(order.getOrderId())};
 
-        String where =  TABLE_ORDER_ID + " = ?";
+        String where = TABLE_ORDER_ID + " = ?";
 
-        return db.updateRecord(TABLE_ORDER,values,where,params);
+        return db.updateRecord(TABLE_ORDER, values, where, params);
     }
 
-    public Order getOrderById(Integer orderId){
+    public Order getOrderById(Integer orderId) {
         Order order = null;
 
         String query = "SELECT " +
@@ -103,5 +107,9 @@ public class OrderDbHelper {
             }
         }
         return order;
+    }
+
+    public void deleteOrder(int orderid) {
+        db.deleteRecord(TABLE_ORDER, orderid);
     }
 }

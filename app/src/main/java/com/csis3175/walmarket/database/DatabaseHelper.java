@@ -49,22 +49,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //insert data
         String[] strings = StoreDbHelper.insertInitialData();
-        for(String s : strings)
+        for (String s : strings)
             db.execSQL(s);
 
         strings = CategoryDbHelper.insertInitialData();
-        for(String s : strings)
+        for (String s : strings)
             db.execSQL(s);
 
         strings = UserDbHelper.insertInitialData();
-        for(String s : strings)
+        for (String s : strings)
             db.execSQL(s);
 
-        for(ContentValues values : ItemDbHelper.insertInitialData())
-            db.insert(ItemDbHelper.TABLE_ITEM,null,values);
+        for (ContentValues values : ItemDbHelper.insertInitialData())
+            db.insert(ItemDbHelper.TABLE_ITEM, null, values);
 
-        for(ContentValues values : ItemStoreDbHelper.insertInitialData())
-            db.insert(ItemStoreDbHelper.TABLE_ITEM_STORE,null,values);
+        for (ContentValues values : ItemStoreDbHelper.insertInitialData())
+            db.insert(ItemStoreDbHelper.TABLE_ITEM_STORE, null, values);
 
 
     }
@@ -83,13 +83,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addRecord(String table, ContentValues values) {
+    public long addRecord(String table, ContentValues values) {
         SQLiteDatabase database = this.getWritableDatabase();
         long insert = database.insert(table, null, values);
-        if (insert > 0)
-            return true;
-        else
-            return false;
+        return insert;
 
     }
 

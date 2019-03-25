@@ -34,7 +34,7 @@ public class OrderItemDbHelper {
 
     }
 
-    public boolean addItem(OrderItem orderItem){
+    public long addItem(OrderItem orderItem){
         ContentValues values = new ContentValues();
         values.put(TABLE_ORDER_ITEM_ORDER_ID, orderItem.getOrderId());
         values.put(TABLE_ORDER_ITEM_ITEM_ID, orderItem.getItemId());

@@ -36,7 +36,7 @@ public class UserDbHelper {
                 ")";
     }
 
-    public boolean addUser(User user){
+    public long addUser(User user){
         ContentValues values = new ContentValues();
         values.put(TABLE_USER_FNAME, user.getfName());
         values.put(TABLE_USER_LNAME, user.getlName());

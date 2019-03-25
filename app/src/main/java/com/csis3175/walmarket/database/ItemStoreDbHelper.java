@@ -34,7 +34,7 @@ public class ItemStoreDbHelper {
                 ") WITHOUT ROWID";
     }
 
-    public boolean addItemStore(ItemStore itemStore) {
+    public long addItemStore(ItemStore itemStore) {
         ContentValues values = new ContentValues();
         values.put(TABLE_ITEM_STORE_ITEM_ID, itemStore.getItemId());
         values.put(TABLE_ITEM_STORE_STORE_ID, itemStore.getStoreId());

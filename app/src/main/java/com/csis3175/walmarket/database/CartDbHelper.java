@@ -28,7 +28,7 @@ public class CartDbHelper {
                 ")";
     }
 
-    public boolean addCart(Cart cart) {
+    public long addCart(Cart cart) {
         ContentValues values = new ContentValues();
         values.put(TABLE_CART_USER_ID, cart.getUserId());
         values.put(TABLE_CART_STORE_ID, cart.getStoreId());
@@ -80,8 +80,8 @@ public class CartDbHelper {
 
         String query = "SELECT * FROM " + TABLE_CART +
                 " WHERE " + TABLE_CART_STORE_ID + " = ? " +
-                " AND " + TABLE_CART_USER_ID + " = ? ORDER BY "+TABLE_CART_ID;
-        String[] params = new String[]{String.valueOf(storeId),String.valueOf(userId)};
+                " AND " + TABLE_CART_USER_ID + " = ? ORDER BY " + TABLE_CART_ID;
+        String[] params = new String[]{String.valueOf(storeId), String.valueOf(userId)};
         Cursor data = db.getData(query, params);
 
         if (data != null && data.getCount() > 0) {
@@ -98,5 +98,11 @@ public class CartDbHelper {
         }
         return cart;
 
+    }
+
+    public void deleteCart(Integer cartId) {
+        String query = "DELETE FROM "+TABLE_CART+" WHERE "+TABLE_CART_ID+" = ?";
+        Object[] params = {cartId};
+        db.deleteRecord(query,params);
     }
 }

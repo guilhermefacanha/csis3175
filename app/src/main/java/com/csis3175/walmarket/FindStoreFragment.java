@@ -72,14 +72,12 @@ public class FindStoreFragment extends Fragment {
                 getStoresFromPostalCode();
                 if (address != null){
                     SelectStoreFragment selectStoreFragment = new SelectStoreFragment(stores, txtPostalCode.getText().toString(), address);
-                    //selectStoreFragment.setupParameters(stores, txtPostalCode.getText().toString(), address, getActivity(), view);
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.frameContent, selectStoreFragment);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     ft.addToBackStack(selectStoreFragment.getClass().getSimpleName());
                     ft.commit();
                 }
-                    //mainActivity.goToSelectStore(stores, txtPostalCode.getText().toString(), address);
             }
         });
 

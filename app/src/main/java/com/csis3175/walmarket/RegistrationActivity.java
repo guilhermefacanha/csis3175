@@ -58,7 +58,7 @@ public class RegistrationActivity extends AppCompatActivity {
             if (userDb != null)
                 throw new Exception("The email address " + user.getEmail() + " is already registered!");
 
-            if(!userDbHelper.addUser(user))
+            if(userDbHelper.addUser(user) <= 0)
                 throw new Exception("Error registering user!");
 
             startActivity(new Intent(this, RegistrationConfirmActivity.class));

@@ -32,7 +32,7 @@ public class ItemDbHelper {
     }
 
 
-    public boolean addItem(Item item) {
+    public long addItem(Item item) {
         ContentValues values = new ContentValues();
         values.put(TABLE_ITEM_CATEGORY_ID, item.getCategoryId());
         values.put(TABLE_ITEM_DESCRIPTION, item.getDescription());

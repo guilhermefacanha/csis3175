@@ -34,7 +34,7 @@ public class CartItemDbHelper {
                 ") WITHOUT ROWID";
     }
 
-    public boolean addCartItem(CartItem cartItem) {
+    public long addCartItem(CartItem cartItem) {
         ContentValues values = new ContentValues();
         values.put(TABLE_CART_ITEM_CART_ID, cartItem.getCartId());
         values.put(TABLE_CART_ITEM_ITEM_ID, cartItem.getItemId());

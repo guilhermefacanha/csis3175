@@ -39,7 +39,7 @@ public class CategoryDbHelper {
         return inserts;
     }
 
-    public boolean addCategory(Category category){
+    public long addCategory(Category category){
         ContentValues values = new ContentValues();
         values.put(TABLE_CATEGORY_DESCRIPTION, category.getDescription());
 
