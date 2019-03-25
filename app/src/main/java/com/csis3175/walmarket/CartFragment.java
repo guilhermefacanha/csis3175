@@ -69,6 +69,7 @@ public class CartFragment extends Fragment {
 
         btnCheckout = mainActivity.findViewById(R.id.btnCheckout);
         btnCheckout.setOnClickListener(onBtnCheckoutClick());
+
     }
 
     private View.OnClickListener onBtnCheckoutClick() {
@@ -86,7 +87,7 @@ public class CartFragment extends Fragment {
     }
 
     private void initializeList() {
-        if(cart!=null){
+        if (cart != null) {
             try {
                 items = cartItemDbHelper.getCartItemsByCartId(cart.getCartId());
                 CartItemListAdapter adapter = new CartItemListAdapter(items, mainActivity, this);
@@ -96,6 +97,11 @@ public class CartFragment extends Fragment {
                 MessageUtil.addMessage(e.getMessage(), mainActivity);
             }
         }
+
+        if (cart == null || items == null || items.isEmpty())
+            btnCheckout.setVisibility(View.INVISIBLE);
+        else
+            btnCheckout.setVisibility(View.VISIBLE);
     }
 
     public void updateCart(String msg) {
