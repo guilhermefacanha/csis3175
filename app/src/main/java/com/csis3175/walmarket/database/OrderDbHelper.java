@@ -89,7 +89,7 @@ public class OrderDbHelper {
                 TABLE_ORDER_TOTAL +
                 " FROM " + TABLE_ORDER +
                 " WHERE " + TABLE_ORDER_ID + " = ?";
-        String[] params = new String[]{String.valueOf(order.getOrderId())};
+        String[] params = new String[]{String.valueOf(orderId)};
         Cursor data = db.getData(query, params);
 
         if (data != null && data.getCount() > 0) {

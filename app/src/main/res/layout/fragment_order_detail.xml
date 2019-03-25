@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/frame_top_margin"
+    android:background="@color/colorBG"
+    tools:context=".OrderDetailFragment" >
+
+    <TextView
+        android:id="@+id/txtOrderDetailDateType"
+        android:layout_width="218dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/textView29"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="43dp"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtOrderDetailTotal"
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="107dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtOrderDetailTax"
+        android:layout_width="139dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textView28"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="248dp"
+        android:layout_marginTop="0dp"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/lbl_order_detail"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="145dp"
+        android:text="@string/lbl_items"
+        android:textColor="@color/colorTextGreen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/lstOrderItems"
+        android:layout_width="match_parent"
+        android:layout_height="431dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="178dp" />
+</RelativeLayout>

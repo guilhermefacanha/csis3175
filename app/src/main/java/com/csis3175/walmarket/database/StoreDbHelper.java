@@ -84,11 +84,7 @@ public class StoreDbHelper {
     public Store getStoreById(Integer storeId) {
         Store store = null;
 
-        String query = "SELECT " +
-                TABLE_STORE_NAME + ", " +
-                TABLE_STORE_LATITUDE + ", " +
-                TABLE_STORE_LONGITUDE + ", " +
-                TABLE_STORE_ADDRESS +
+        String query = "SELECT * " +
                 " FROM " + TABLE_STORE +
                 " WHERE " + TABLE_STORE_ID + " = ?";
         String[] params = new String[]{String.valueOf(storeId)};

@@ -55,6 +55,7 @@ public class MyOrdersFragment extends Fragment {
 
         orders = orderDbHelper.getOrdersByUser(user.getUserId());
 
+        listMap = new ArrayList<>();
         initializeList();
     }
 
@@ -91,7 +92,12 @@ public class MyOrdersFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Order order = orders.get(position);
-                MessageUtil.addMessage("Show order "+order.getOrderId()+" - "+order.getDate(), mainActivity);
+                OrderDetailFragment fragment = new OrderDetailFragment(order.getOrderId());
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.frameContent, fragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(fragment.getClass().getSimpleName());
+                ft.commit();
             }
         };
     }

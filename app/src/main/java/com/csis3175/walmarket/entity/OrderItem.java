@@ -6,6 +6,9 @@ public class OrderItem {
     private Double price;
     private Integer quantity;
 
+    private String itemDescription;
+    private byte[] itemImage;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -36,5 +39,21 @@ public class OrderItem {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    public byte[] getItemImage() {
+        return itemImage;
+    }
+
+    public void setItemImage(byte[] itemImage) {
+        this.itemImage = itemImage;
     }
 }

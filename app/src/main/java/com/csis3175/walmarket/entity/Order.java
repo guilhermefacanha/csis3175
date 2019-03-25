@@ -10,6 +10,7 @@ public class Order {
     private Double deliverCharge;
     private Double friendDiscount;
     private Double total;
+    private String storeDescription;
 
     public Integer getOrderId() {
         return orderId;
@@ -81,5 +82,13 @@ public class Order {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public String getStoreDescription() {
+        return storeDescription;
+    }
+
+    public void setStoreDescription(String storeDescription) {
+        this.storeDescription = storeDescription;
     }
 }

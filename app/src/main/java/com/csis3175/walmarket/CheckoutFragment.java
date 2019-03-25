@@ -135,7 +135,6 @@ public class CheckoutFragment extends Fragment {
             delivery = 0;
 
         beforeTax = totalItems + delivery;
-        totalTax = beforeTax * tax;
 
         if (user.getApplyFriendlyDisc() > 0) {
             double rate = (double) user.getApplyFriendlyDisc();
@@ -143,7 +142,8 @@ public class CheckoutFragment extends Fragment {
             beforeTax = beforeTax - discount;
         }
 
-        total = beforeTax * totalTax;
+        totalTax = beforeTax * tax;
+        total = beforeTax + totalTax;
     }
 
 
