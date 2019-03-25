@@ -96,7 +96,7 @@ public class OrderDetailFragment extends Fragment {
         txtTotal.setText(orderTotalInfo.toString());
 
         StringBuffer orderTotalTax = new StringBuffer();
-        orderTotalTax.append("Discount: " + order.getFriendDiscount() + (order.getFriendDiscount() > 0 ? "%" : "") + "\n");
+        orderTotalTax.append("Discount: " + NumberFormat.getCurrencyInstance().format(order.getFriendDiscount())+ "\n");
         orderTotalTax.append("Delivery: " + NumberFormat.getCurrencyInstance().format(order.getDeliverCharge()));
         txtTax.setText(orderTotalTax.toString());
     }

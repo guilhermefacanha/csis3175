@@ -86,13 +86,15 @@ public class CartFragment extends Fragment {
     }
 
     private void initializeList() {
-        try {
-            items = cartItemDbHelper.getCartItemsByCartId(cart.getCartId());
-            CartItemListAdapter adapter = new CartItemListAdapter(items, mainActivity, this);
-            list = mainActivity.findViewById(R.id.lstCartItem);
-            list.setAdapter(adapter);
-        } catch (Exception e) {
-            MessageUtil.addMessage(e.getMessage(), mainActivity);
+        if(cart!=null){
+            try {
+                items = cartItemDbHelper.getCartItemsByCartId(cart.getCartId());
+                CartItemListAdapter adapter = new CartItemListAdapter(items, mainActivity, this);
+                list = mainActivity.findViewById(R.id.lstCartItem);
+                list.setAdapter(adapter);
+            } catch (Exception e) {
+                MessageUtil.addMessage(e.getMessage(), mainActivity);
+            }
         }
     }
 
