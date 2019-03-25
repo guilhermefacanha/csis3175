@@ -96,8 +96,10 @@ public class InviteFriendsFragment extends Fragment {
     public void confirmFriendInvitation(View view){
         User user = userDbHelper.getUserByEmail(SessionUtil.getUser(getActivity()).getEmail());
         user.setApplyFriendlyDisc(10);
+
         userDbHelper.updateRecord(user);
 
+        SessionUtil.setUser(user,mainActivity);
     }
 
 

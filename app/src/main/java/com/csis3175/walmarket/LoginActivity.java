@@ -13,6 +13,10 @@ import com.csis3175.walmarket.util.Md5Util;
 import com.csis3175.walmarket.util.MessageUtil;
 import com.csis3175.walmarket.util.SessionUtil;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText txtEmail, txtPassword;
@@ -36,7 +40,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void forgotPassword(View view) {
-        MessageUtil.addMessage("Forgot Password. Action not Implemented!", this);
+        String email = txtEmail.getText().toString();
+        User user = userDbHelper.getUserByEmail(email);
+        DateFormat simpledate = new SimpleDateFormat("HHmmss");
+        String newpass = simpledate.format(new Date());
+        user.setPassword(Md5Util.getMd5(newpass));
+        userDbHelper.updateRecord(user);
+        MessageUtil.addMessage("Your password was reseted to "+newpass+"!", this);
 
     }
 

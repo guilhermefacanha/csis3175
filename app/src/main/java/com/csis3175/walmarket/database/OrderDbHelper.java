@@ -8,6 +8,7 @@ import com.csis3175.walmarket.entity.CartItem;
 import com.csis3175.walmarket.entity.Order;
 import com.csis3175.walmarket.entity.OrderItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDbHelper {
@@ -111,5 +112,45 @@ public class OrderDbHelper {
 
     public void deleteOrder(int orderid) {
         db.deleteRecord(TABLE_ORDER, orderid);
+    }
+
+    public List<Order> getOrdersByUser(Integer userId) {
+        List<Order> list = new ArrayList<>();
+
+        String query = "SELECT " +
+                TABLE_ORDER_ID + "," +
+                TABLE_ORDER_USER_ID + ", " +
+                TABLE_ORDER_STORE_ID + ", " +
+                TABLE_ORDER_DATE + ", " +
+                TABLE_ORDER_STATUS + ", " +
+                TABLE_ORDER_DELIVER_PICKUP_OPT + ", " +
+                TABLE_ORDER_DELIVER_CHARGE + ", " +
+                TABLE_ORDER_FRIEND_DISCOUNT + ", " +
+                TABLE_ORDER_TOTAL +
+                " FROM " + TABLE_ORDER +
+                " WHERE " + TABLE_ORDER_USER_ID + " = ?";
+        String[] params = new String[]{String.valueOf(userId)};
+        Cursor data = db.getData(query, params);
+
+        if (data != null && data.getCount() > 0) {
+            while (data.moveToNext()) {
+                Order order = new Order();
+                int i = 0;
+                order.setOrderId(data.getInt(i++));
+                order.setUserId(data.getInt(i++));
+                order.setStoreId(data.getInt(i++));
+                order.setDate(data.getString(i++));
+                order.setStatus(data.getString(i++));
+                order.setDeliverPickupOpt(data.getString(i++));
+                order.setDeliverCharge(data.getDouble(i++));
+                order.setFriendDiscount(data.getDouble(i++));
+                order.setTotal(data.getDouble(i++));
+
+                list.add(order);
+            }
+        }
+
+
+        return list;
     }
 }

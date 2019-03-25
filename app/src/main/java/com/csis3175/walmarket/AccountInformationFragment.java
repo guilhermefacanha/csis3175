@@ -94,7 +94,7 @@ public class AccountInformationFragment extends Fragment {
 
                     if(txtNewPass.getText().toString().equals(txtConfirmPass.getText().toString())){
                         if(!Md5Util.getMd5(txtNewPass.getText().toString()).equals(user.getPassword())) {
-                            user.setPassword(txtNewPass.getText().toString());
+                            user.setPassword(Md5Util.getMd5(txtNewPass.getText().toString()));
                             userDbHelper.updateRecord(user);
                             MessageUtil.addMessage("Password Updated", mainActivity);
                         }

@@ -134,13 +134,15 @@ public class CheckoutFragment extends Fragment {
         else
             delivery = 0;
 
-        if (user.getApplyFriendlyDisc() > 0) {
+        beforeTax = totalItems + delivery;
+        totalTax = beforeTax * tax;
 
-            discount = (user.getApplyFriendlyDisc() / 100) * total;
+        if (user.getApplyFriendlyDisc() > 0) {
+            double rate = (double) user.getApplyFriendlyDisc();
+            discount = (rate / 100) * beforeTax;
+            beforeTax = beforeTax - discount;
         }
 
-        beforeTax = totalItems + delivery - discount;
-        totalTax = beforeTax * tax;
         total = beforeTax * totalTax;
     }
 
@@ -158,7 +160,8 @@ public class CheckoutFragment extends Fragment {
                 order.setFriendDiscount(discount);
                 order.setStoreId(store.getStoreId());
                 order.setUserId(user.getUserId());
-                order.setStatus("Closed");
+                order.setStatus("Completed");
+                order.setTotal(total);
 
                 Long orderid = orderDbHelper.addOrder(order);
                 if (orderid > 0) {
@@ -178,12 +181,14 @@ public class CheckoutFragment extends Fragment {
 
                         cartDbHelper.deleteCart(cart.getCartId());
 
-                        FindStoreFragment fragment = new FindStoreFragment();
+                        MyOrdersFragment fragment = new MyOrdersFragment();
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.replace(R.id.frameContent, fragment);
                         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                         ft.addToBackStack(fragment.getClass().getSimpleName());
                         ft.commit();
+
+                        MessageUtil.addMessage("Order placed successfully.",mainActivity);
 
                     } catch (Exception e) {
                         MessageUtil.addMessage("Unable to place order: " + e.getMessage(), mainActivity);

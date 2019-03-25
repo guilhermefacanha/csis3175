@@ -65,6 +65,7 @@ public class SelectStoreFragment extends Fragment {
 
     private void initalizeList() {
         try {
+            listMap.clear();
             for (Store store : stores) {
                 HashMap<String, String> map = new HashMap<>();
                 //map.put("img", Integer.toString(R.drawable.ic_map));
