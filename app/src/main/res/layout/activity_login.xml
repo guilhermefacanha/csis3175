@@ -15,10 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="123dp"
         android:text="@string/lbl_login_title"
         android:textColor="@color/colorTextGreen"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="390dp"
+        android:layout_marginTop="468dp"
         android:text="@string/lbl_account_title"
         android:textColor="@color/colorTextGreen"
         android:textSize="18sp"
@@ -105,11 +105,13 @@
         android:layout_height="@dimen/btn_default_height"
         android:layout_alignStart="@+id/textView3"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="331dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="351dp"
         android:background="@drawable/roundbtn"
         android:onClick="signIn"
         android:text="@string/lbl_sign_in"
-        android:textColor="@color/colorBtnText" />
+        android:textColor="@color/colorBtnText"
+        android:textSize="@dimen/btn_default_font_size" />
 
     <Button
         android:id="@+id/btnCreateAccount"
@@ -118,11 +120,12 @@
         android:layout_alignStart="@+id/btnSignIn"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="417dp"
+        android:layout_marginTop="495dp"
         android:background="@drawable/roundbtn"
         android:onClick="createAccount"
         android:text="@string/lbl_create_account"
-        android:textColor="@color/colorBtnText" />
+        android:textColor="@color/colorBtnText"
+        android:textSize="@dimen/btn_default_font_size" />
 
     <View
         android:layout_width="match_parent"
@@ -130,7 +133,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="378dp"
+        android:layout_marginTop="422dp"
         android:background="@color/colorText" />
 
 </RelativeLayout>

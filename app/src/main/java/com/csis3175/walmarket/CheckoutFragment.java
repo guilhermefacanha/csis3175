@@ -112,11 +112,11 @@ public class CheckoutFragment extends Fragment {
         updateTotals();
 
         StringBuffer orderInfo = new StringBuffer();
-        orderInfo.append("Items: " + format.format(totalItems) + "\n");
-        orderInfo.append("Delivery: " + format.format(delivery) + "\n");
-        orderInfo.append("Discount: " + format.format(discount) + "\n");
-        orderInfo.append("Total before tax: " + format.format(beforeTax) + "\n");
-        orderInfo.append("Tax(12%): " + format.format(totalTax) + "\n");
+        orderInfo.append("Items:                     " + format.format(totalItems) + "\n"+"\n");
+        orderInfo.append("Delivery:                " + format.format(delivery) +  "\n"+"\n");
+        orderInfo.append("Discount:               " + format.format(discount) +  "\n"+"\n");
+        orderInfo.append("Total before tax:  " + format.format(beforeTax) +  "\n"+"\n");
+        orderInfo.append("Tax(12%):              " + format.format(totalTax) + "\n");
         txtOrder.setText(orderInfo.toString());
 
         txtOrderTotal.setText("Order Total: " + format.format(total));

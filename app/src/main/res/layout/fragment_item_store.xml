@@ -26,11 +26,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="1dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="138dp"
         android:text="@string/lbl_select_items"
         android:textColor="@color/colorTextGreen"
-        android:textSize="28sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <GridView
@@ -41,7 +42,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="125dp"
-        android:numColumns="2" />
+        android:numColumns="2"
+        android:paddingLeft="30dp" />
 
     <ImageView
         android:id="@+id/imgSearch"
@@ -51,6 +53,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="330dp"
         android:layout_marginTop="62dp"
+        android:contentDescription="@string/lblimg"
         android:src="@drawable/ic_search" />
 
 

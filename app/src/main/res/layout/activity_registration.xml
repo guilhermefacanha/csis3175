@@ -32,7 +32,8 @@
         android:background="@drawable/roundbtn"
         android:onClick="register"
         android:text="@string/lbl_create_account"
-        android:textColor="@color/colorBtnText" />
+        android:textColor="@color/colorBtnText"
+        android:textSize="@dimen/btn_default_font_size" />
 
     <TextView
         android:id="@+id/textView12"
@@ -85,12 +86,13 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="129dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="123dp"
         android:text="@string/lbl_registration_title"
         android:textColor="@color/colorTextGreen"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView

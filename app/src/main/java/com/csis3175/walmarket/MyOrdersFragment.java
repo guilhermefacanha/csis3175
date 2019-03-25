@@ -2,7 +2,6 @@ package com.csis3175.walmarket;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.se.omapi.Session;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -43,7 +42,7 @@ public class MyOrdersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_orders, container, false);
+        return inflater.inflate(R.layout.fragment_order_history, container, false);
     }
 
     @Override

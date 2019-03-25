@@ -40,9 +40,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="454dp"
         android:background="@drawable/roundbtn"
-        android:onClick="applychange"
         android:text="@string/ApplyChanges"
-        android:textColor="@color/colorBtnText" />
+        android:textColor="@color/colorBtnText"
+        android:textSize="@dimen/btn_default_font_size" />
 
     <TextView
         android:id="@+id/tvAddress"
@@ -84,10 +84,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
         android:text="@string/ActInfo"
         android:textColor="@color/colorTextGreen"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView

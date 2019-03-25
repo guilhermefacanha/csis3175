@@ -16,7 +16,8 @@
         android:layout_marginTop="439dp"
         android:background="@drawable/roundbtn"
         android:text="@string/lbl_checkout"
-        android:textColor="@color/colorBtnText" />
+        android:textColor="@color/colorBtnText"
+        android:textSize="@dimen/btn_default_font_size" />
 
     <TextView
         android:id="@+id/textView20"

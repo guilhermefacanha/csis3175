@@ -18,7 +18,8 @@
         android:background="@drawable/roundbtn"
         android:onClick="onButtonPressed"
         android:text="@string/lbl_continue"
-        android:textColor="@color/colorBtnText" />
+        android:textColor="@color/colorBtnText"
+        android:textSize="@dimen/btn_default_font_size" />
 
     <EditText
         android:id="@+id/txtFindPostalCode"

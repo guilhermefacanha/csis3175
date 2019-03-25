@@ -17,7 +17,8 @@
         android:layout_marginTop="402dp"
         android:background="@drawable/roundbtn"
         android:text="@string/lbl_invite_friends"
-        android:textColor="@color/colorBtnText" />
+        android:textColor="@color/colorBtnText"
+        android:textSize="@dimen/btn_default_font_size" />
 
     <TextView
         android:id="@+id/textView27"
