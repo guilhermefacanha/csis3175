@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText txtEmail, txtPassword;
     UserDbHelper userDbHelper;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +43,29 @@ public class LoginActivity extends AppCompatActivity {
     public void forgotPassword(View view) {
         String email = txtEmail.getText().toString();
         User user = userDbHelper.getUserByEmail(email);
-        DateFormat simpledate = new SimpleDateFormat("HHmmss");
-        String newpass = simpledate.format(new Date());
-        user.setPassword(Md5Util.getMd5(newpass));
-        userDbHelper.updateRecord(user);
-        MessageUtil.addMessage("Your password was reseted to "+newpass+"!", this);
+        try {
+            if(!email.isEmpty()) {
+                if (!(userDbHelper.getUserByEmail(email) == null)) {
+
+                    DateFormat simpledate = new SimpleDateFormat("HHmmss");
+                    String newpass = simpledate.format(new Date());
+                    user.setPassword(Md5Util.getMd5(newpass));
+                    userDbHelper.updateRecord(user);
+                    MessageUtil.addMessage("Your password was reseted to: " + newpass, this);
+                }
+                else
+                {throw new Exception("Email does not exist");}
+            }
+
+            else{
+                throw new Exception("Enter a valid Email address");
+            }
+
+        }
+        catch (Exception e){
+            MessageUtil.addMessage(e.getMessage(), this);
+
+        }
 
     }
 
