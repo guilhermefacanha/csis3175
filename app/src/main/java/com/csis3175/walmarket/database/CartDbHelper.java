@@ -24,7 +24,11 @@ public class CartDbHelper {
                 TABLE_CART_ID + " INTEGER PRIMARY KEY," +
                 TABLE_CART_USER_ID + " INTEGER," +
                 TABLE_CART_STORE_ID + " INTEGER," +
-                TABLE_CART_TOTAL + " REAL " +
+                TABLE_CART_TOTAL + " REAL, " +
+                "FOREIGN KEY(" + TABLE_CART_USER_ID + ") " +
+                "  REFERENCES " + UserDbHelper.TABLE_USER + "(" + UserDbHelper.TABLE_USER_ID + ")" +
+                "FOREIGN KEY(" + TABLE_CART_STORE_ID + ") " +
+                "  REFERENCES " + StoreDbHelper.TABLE_STORE + "(" + StoreDbHelper.TABLE_STORE_ID + ")" +
                 ")";
     }
 

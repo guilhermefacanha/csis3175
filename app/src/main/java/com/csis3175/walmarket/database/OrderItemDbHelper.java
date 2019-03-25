@@ -33,6 +33,11 @@ public class OrderItemDbHelper {
                 " PRIMARY KEY (" +
                 TABLE_ORDER_ITEM_ORDER_ID + ", " +
                 TABLE_ORDER_ITEM_ITEM_ID + ") " +
+                "FOREIGN KEY(" + TABLE_ORDER_ITEM_ORDER_ID + ") " +
+                "  REFERENCES " + OrderDbHelper.TABLE_ORDER + "(" + OrderDbHelper.TABLE_ORDER_ID + ")" +
+
+                "FOREIGN KEY(" + TABLE_ORDER_ITEM_ITEM_ID + ") " +
+                "  REFERENCES " + ItemDbHelper.TABLE_ITEM + "(" + ItemDbHelper.TABLE_ITEM_ID + ")" +
                 ") WITHOUT ROWID";
 
     }

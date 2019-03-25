@@ -39,8 +39,12 @@ public class OrderDbHelper {
                 TABLE_ORDER_DELIVER_PICKUP_OPT + " TEXT, " +
                 TABLE_ORDER_DELIVER_CHARGE + " REAL, " +
                 TABLE_ORDER_FRIEND_DISCOUNT + " REAL, " +
-                TABLE_ORDER_TOTAL + " REAL " +
-                ")";
+                TABLE_ORDER_TOTAL + " REAL, " +
+                "FOREIGN KEY(" + TABLE_ORDER_USER_ID + ") " +
+                "  REFERENCES " + UserDbHelper.TABLE_USER + "(" + UserDbHelper.TABLE_USER_ID + ")" +
+                "FOREIGN KEY(" + TABLE_ORDER_STORE_ID + ") " +
+                "  REFERENCES " + StoreDbHelper.TABLE_STORE + "(" + StoreDbHelper.TABLE_STORE_ID + ")" +
+                ") ";
     }
 
     public long addOrder(Order order) {

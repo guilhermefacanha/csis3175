@@ -26,7 +26,9 @@ public class ItemDbHelper {
                 TABLE_ITEM_ID + " INTEGER PRIMARY KEY," +
                 TABLE_ITEM_CATEGORY_ID + " INTEGER," +
                 TABLE_ITEM_DESCRIPTION + " TEXT," +
-                TABLE_ITEM_IMAGE + " BLOB" +
+                TABLE_ITEM_IMAGE + " BLOB," +
+                "FOREIGN KEY(" + TABLE_ITEM_CATEGORY_ID + ") " +
+                "  REFERENCES " + CategoryDbHelper.TABLE_CATEGORY + "(" + CategoryDbHelper.TABLE_CATEGORY_ID + ")" +
                 ")";
 
     }

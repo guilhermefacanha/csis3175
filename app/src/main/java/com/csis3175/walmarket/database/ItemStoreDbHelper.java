@@ -31,6 +31,10 @@ public class ItemStoreDbHelper {
                 " PRIMARY KEY (" +
                 TABLE_ITEM_STORE_ITEM_ID + ", " +
                 TABLE_ITEM_STORE_STORE_ID + ") " +
+                "FOREIGN KEY(" + TABLE_ITEM_STORE_ITEM_ID + ") " +
+                "  REFERENCES " + ItemDbHelper.TABLE_ITEM + "(" + ItemDbHelper.TABLE_ITEM_ID + ")" +
+                "FOREIGN KEY(" + TABLE_ITEM_STORE_STORE_ID + ") " +
+                "  REFERENCES " + StoreDbHelper.TABLE_STORE + "(" + StoreDbHelper.TABLE_STORE_ID + ")" +
                 ") WITHOUT ROWID";
     }
 

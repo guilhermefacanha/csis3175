@@ -31,6 +31,10 @@ public class CartItemDbHelper {
                 " PRIMARY KEY (" +
                 TABLE_CART_ITEM_CART_ID + ", " +
                 TABLE_CART_ITEM_ITEM_ID + ") " +
+                "FOREIGN KEY(" + TABLE_CART_ITEM_CART_ID + ") " +
+                "  REFERENCES " + CartDbHelper.TABLE_CART + "(" + CartDbHelper.TABLE_CART_ID + ")" +
+                "FOREIGN KEY(" + TABLE_CART_ITEM_ITEM_ID + ") " +
+                "  REFERENCES " + ItemDbHelper.TABLE_ITEM + "(" + ItemDbHelper.TABLE_ITEM_ID + ")" +
                 ") WITHOUT ROWID";
     }
 
