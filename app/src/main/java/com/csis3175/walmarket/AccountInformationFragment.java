@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.csis3175.walmarket.database.UserDbHelper;
 import com.csis3175.walmarket.entity.User;
+import com.csis3175.walmarket.util.Md5Util;
 import com.csis3175.walmarket.util.MessageUtil;
 import com.csis3175.walmarket.util.SessionUtil;
 
@@ -24,7 +25,7 @@ public class AccountInformationFragment extends Fragment {
     User user;
     MainActivity mainActivity;
 
-  EditText txtlName,txtfName,txtAdrress,txtNewPass,txtEmail,txtConfirmPass;
+  EditText txtlName,txtfName,txtAddress,txtNewPass,txtEmail,txtConfirmPass;
   Button btn;
 
     @Override
@@ -44,7 +45,7 @@ public class AccountInformationFragment extends Fragment {
         txtfName = mainActivity.findViewById(R.id.etfName);
         txtlName = mainActivity.findViewById(R.id.etlName);
         txtEmail = mainActivity.findViewById(R.id.etEmail);
-        txtAdrress = mainActivity.findViewById(R.id.etAddress);
+        txtAddress = mainActivity.findViewById(R.id.etAddress);
         txtNewPass = mainActivity.findViewById(R.id.etNewPassword);
         txtConfirmPass = mainActivity.findViewById(R.id.etConfirmPassword);
         btn = mainActivity.findViewById(R.id.btnApplyChanges);
@@ -53,7 +54,7 @@ public class AccountInformationFragment extends Fragment {
         txtfName.setText(user.getfName());
         txtlName.setText(user.getlName());
         txtEmail.setText(user.getEmail());
-        txtAdrress.setText(user.getAddress());
+        txtAddress.setText(user.getAddress());
 
 
 
@@ -83,8 +84,8 @@ public class AccountInformationFragment extends Fragment {
                     MessageUtil.addMessage("Email Updated", mainActivity);
                 }
 
-                if(!txtAdrress.getText().toString().equals(user.getAddress())){
-                    user.setAddress(txtAdrress.getText().toString());
+                if(!txtAddress.getText().toString().equals(user.getAddress())){
+                    user.setAddress(txtAddress.getText().toString());
                     userDbHelper.updateRecord(user);
                     MessageUtil.addMessage("Address Updated", mainActivity);
                 }
@@ -92,20 +93,21 @@ public class AccountInformationFragment extends Fragment {
                 if(!txtNewPass.getText().toString().isEmpty()){
 
                     if(txtNewPass.getText().toString().equals(txtConfirmPass.getText().toString())){
-                        user.setPassword(txtNewPass.getText().toString());
-                        userDbHelper.updateRecord(user);
-                        MessageUtil.addMessage("Password Updated", mainActivity);
+                        if(!Md5Util.getMd5(txtNewPass.getText().toString()).equals(user.getPassword())) {
+                            user.setPassword(txtNewPass.getText().toString());
+                            userDbHelper.updateRecord(user);
+                            MessageUtil.addMessage("Password Updated", mainActivity);
+                        }
+                        else {
+                            MessageUtil.addMessage("This is your current password", mainActivity);
+                        }
+
                     }
 
                     else{
                         MessageUtil.addMessage("Passwords does not match", mainActivity);
                     }
-
-
-
                 }
-
-
             }
         });
 

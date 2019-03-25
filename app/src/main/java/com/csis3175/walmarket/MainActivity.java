@@ -130,6 +130,8 @@ public class MainActivity extends AppCompatActivity
             initializeFragment();
 
         } else if (id == R.id.nav_view_orders) {
+            fragment = new MyOrdersFragment();
+            initializeFragment();
             MessageUtil.addMessage("You pushed " + id, this);
 
         } else if (id == R.id.nav_share) {
