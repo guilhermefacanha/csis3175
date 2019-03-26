@@ -46,7 +46,7 @@
     <string name="lbl_others">More</string>
     <string name="lbl_find_store">Find a Store</string>
     <string name="lbl_account_info">Account Information</string>
-    <string name="lbl_view_order">My Orders</string>
+    <string name="lbl_view_order">Order History</string>
     <string name="lbl_find_store_near">Find a store near me</string>
     <string name="lbl_postal_code">Postal Code</string>
     <string name="lbl_continue">Continue</string>
@@ -88,6 +88,9 @@
     <string name="lbl_order_ID">Order ID</string>
     <string name="lbl_order_date">Date</string>
     <string name="lbl_order_type">Type</string>
+    <string name="lbl_item">Item</string>
+    <string name="lbl_qty">Qty.</string>
+    <string name="lbl_subtotal">Subtotal</string>
 
 
 </resources>

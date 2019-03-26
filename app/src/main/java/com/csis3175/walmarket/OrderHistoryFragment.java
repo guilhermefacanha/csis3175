@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class MyOrdersFragment extends Fragment {
+public class OrderHistoryFragment extends Fragment {
     MainActivity mainActivity;
     private List<Order> orders = new ArrayList<>();
 

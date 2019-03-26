@@ -7,15 +7,62 @@
     android:background="@color/colorBG"
     tools:context=".OrderDetailFragment" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="180dp">
+
+        <TextView
+            android:id="@+id/order_item"
+            android:layout_width="184dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="85dp"
+            android:text="@string/lbl_item"
+            android:textColor="@color/colorTextGreen"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/order_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:text="@string/lbl_qty"
+            android:textColor="@color/colorTextGreen"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/order_subtotal"
+            android:layout_width="31dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="5dp"
+            android:text="@string/lbl_subtotal"
+            android:textColor="@color/colorTextGreen"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/txtOrderDetailDateType"
-        android:layout_width="218dp"
-        android:layout_height="50dp"
-        android:layout_alignStart="@+id/textView29"
+        android:layout_width="217dp"
+        android:layout_height="67dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="55dp"
         android:textColor="@color/colorTextGreen"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -24,22 +71,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="107dp"
+        android:layout_marginTop="129dp"
         android:textAlignment="center"
         android:textColor="@color/colorTextGreen"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtOrderDetailTax"
-        android:layout_width="139dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/textView28"
+        android:layout_width="141dp"
+        android:layout_height="65dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="248dp"
-        android:layout_marginTop="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="251dp"
+        android:layout_marginTop="55dp"
         android:textColor="@color/colorTextGreen"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -54,25 +101,12 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="145dp"
-        android:text="@string/lbl_items"
-        android:textColor="@color/colorTextGreen"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
     <ListView
         android:id="@+id/lstOrderItems"
         android:layout_width="match_parent"
-        android:layout_height="431dp"
+        android:layout_height="410dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="178dp" />
+        android:layout_marginTop="199dp" />
 </RelativeLayout>

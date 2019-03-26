@@ -181,7 +181,7 @@ public class CheckoutFragment extends Fragment {
 
                         cartDbHelper.deleteCart(cart.getCartId());
 
-                        MyOrdersFragment fragment = new MyOrdersFragment();
+                        OrderHistoryFragment fragment = new OrderHistoryFragment();
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.replace(R.id.frameContent, fragment);
                         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

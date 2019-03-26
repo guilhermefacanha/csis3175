@@ -5,7 +5,6 @@ import android.location.Address;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -130,7 +129,7 @@ public class MainActivity extends AppCompatActivity
             initializeFragment();
 
         } else if (id == R.id.nav_view_orders) {
-            fragment = new MyOrdersFragment();
+            fragment = new OrderHistoryFragment();
             initializeFragment();
 
         } else if (id == R.id.nav_share) {

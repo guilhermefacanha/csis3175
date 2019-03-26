@@ -19,7 +19,9 @@
         android:layout_height="@dimen/lst_height"
         android:layout_weight="1"
         android:gravity="center"
-        android:textSize="14sp" />
+        android:textColor="@color/colorTextGreen"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/order_item_qty"
@@ -27,7 +29,9 @@
         android:layout_height="@dimen/lst_height"
         android:layout_weight="1"
         android:gravity="center"
-        android:textSize="14sp" />
+        android:textColor="@color/colorTextGreen"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/order_item_price"
@@ -35,5 +39,7 @@
         android:layout_height="@dimen/lst_height"
         android:layout_weight="1"
         android:gravity="center"
-        android:textSize="14sp" />
+        android:textColor="@color/colorTextGreen"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 </LinearLayout>
