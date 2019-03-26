@@ -1,6 +1,7 @@
 package com.csis3175.walmarket;
 
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +17,7 @@ import com.csis3175.walmarket.database.CartDbHelper;
 import com.csis3175.walmarket.database.CartItemDbHelper;
 import com.csis3175.walmarket.database.OrderDbHelper;
 import com.csis3175.walmarket.database.OrderItemDbHelper;
+import com.csis3175.walmarket.database.UserDbHelper;
 import com.csis3175.walmarket.entity.Cart;
 import com.csis3175.walmarket.entity.CartItem;
 import com.csis3175.walmarket.entity.Order;
@@ -44,6 +46,7 @@ public class CheckoutFragment extends Fragment {
     CartItemDbHelper cartItemDbHelper;
     OrderDbHelper orderDbHelper;
     OrderItemDbHelper orderItemDbHelper;
+    UserDbHelper userDbHelper;
 
     Store store;
     User user;
@@ -111,6 +114,7 @@ public class CheckoutFragment extends Fragment {
         cartItemDbHelper = new CartItemDbHelper(mainActivity);
         orderDbHelper = new OrderDbHelper(mainActivity);
         orderItemDbHelper = new OrderItemDbHelper(mainActivity);
+        userDbHelper = new UserDbHelper(mainActivity);
 
         store = SessionUtil.getStore(mainActivity);
         user = SessionUtil.getUser(mainActivity);
@@ -189,6 +193,11 @@ public class CheckoutFragment extends Fragment {
                             cartItemDbHelper.deleteCartItem(item);
 
                         cartDbHelper.deleteCart(cart.getCartId());
+
+                        User u = userDbHelper.getUserByEmail(user.getEmail());
+                        u.setApplyFriendlyDisc(0);
+                        userDbHelper.updateRecord(u);
+                        SessionUtil.setUser(u,mainActivity);
 
                         OrderHistoryFragment fragment = new OrderHistoryFragment();
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
