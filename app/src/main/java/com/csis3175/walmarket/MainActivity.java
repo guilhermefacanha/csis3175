@@ -1,5 +1,6 @@
 package com.csis3175.walmarket;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity
 
         userLogged = SessionUtil.getUser(this);
         if (userLogged != null && userLogged.getUserId() > 0) {
-            lblUserName.setText(userLogged.getfName() +" "+  userLogged.getlName());
+            lblUserName.setText(userLogged.getfName() + " " + userLogged.getlName());
             lblUserEmail.setText(userLogged.getEmail());
         }
 
@@ -85,6 +86,10 @@ public class MainActivity extends AppCompatActivity
         int count = getSupportFragmentManager().getBackStackEntryCount();
         if (count == 0) {
             super.onBackPressed();
+        } else if (count == 1) {
+            fragment = new FindStoreFragment();
+            initializeFragment();
+            this.moveTaskToBack(true);
         } else {
             getSupportFragmentManager().popBackStack();
             fragment = new FindStoreFragment();
@@ -137,7 +142,7 @@ public class MainActivity extends AppCompatActivity
             initializeFragment();
         } else if (id == R.id.nav_sign_out) {
             SessionUtil.destroy(this);
-            Intent intent =new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
