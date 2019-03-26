@@ -73,8 +73,17 @@ public class CheckoutFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mainActivity = (MainActivity) getActivity();
 
-        initializeVariables();
-        updateOrderInfo();
+        try {
+            initializeVariables();
+            updateOrderInfo();
+        }catch (Exception e){
+            FindStoreFragment fragment = new FindStoreFragment();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.frameContent, fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(fragment.getClass().getSimpleName());
+            ft.commit();
+        }
     }
 
     private void initializeVariables() {
